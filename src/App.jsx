@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Beranda from './pages/Beranda';
 import Pendaftaran from './pages/Pendaftaran';
+import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import DataSantri from './pages/DataSantri';
 import Placeholder from './pages/Placeholder';
@@ -85,6 +86,18 @@ export default function App() {
 
   if (activePage === 'pendaftaran') {
     return <Pendaftaran onNavigate={handleNavigate} />;
+  }
+
+  if (activePage === 'login') {
+    return (
+      <Login
+        onNavigate={handleNavigate}
+        onLoginSuccess={(role, user) => {
+          console.log('[Login] Masuk sebagai', role, user?.email);
+          handleNavigate('dashboard');
+        }}
+      />
+    );
   }
 
   // ── Admin shell layout ──

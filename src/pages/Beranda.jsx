@@ -299,7 +299,7 @@ export default function Beranda({ onNavigate }) {
               ))}
             </nav>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <a
                 href="#"
                 style={{
@@ -314,14 +314,23 @@ export default function Beranda({ onNavigate }) {
                 Pendaftaran Santri Baru
               </a>
               <button
-                onClick={() => onNavigate('data-santri')}
-                style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: 'none' }}
-                title="Portal Staff"
-                aria-label="Portal Staff"
+                onClick={() => onNavigate('login')}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                  padding: '10px 16px', borderRadius: '12px',
+                  background: 'var(--color-surface-container)',
+                  color: 'var(--color-on-surface)',
+                  border: '1.5px solid var(--color-outline-variant)',
+                  cursor: 'pointer', fontWeight: '600', fontSize: '14px',
+                  transition: 'all 0.15s',
+                }}
+                title="Masuk Portal"
               >
-                <span className="material-symbols-outlined" style={{ color: 'var(--color-on-primary)', fontSize: '18px' }}>person</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>login</span>
+                Masuk Portal
               </button>
             </div>
+
           </div>
         </div>
       </header>
