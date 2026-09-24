@@ -705,7 +705,7 @@ export default function Pendaftaran({ onNavigate }) {
   }
 
   return (
-    <div style={{ background: 'var(--color-surface)', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--color-surface)', minHeight: '100vh', width: '100%', overflowX: 'hidden' }}>
 
       {/* ── Compact Navbar ── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(249,249,255,0.96)', backdropFilter: 'blur(16px)', boxShadow: '0 1px 8px rgba(0,0,0,0.06)', borderBottom: '1px solid var(--color-outline-variant)' }}>
