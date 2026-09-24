@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import supabase from '../lib/supabase';
 
 /* ── Constants ── */
 const STEPS = [
@@ -575,9 +576,74 @@ export default function Pendaftaran({ onNavigate }) {
   const updateStep1 = (key, val) => setStep1(p => ({ ...p, [key]: val }));
   const updateStep2 = (key, val) => setStep2(p => ({ ...p, [key]: val }));
 
-  const handleNext = () => {
-    if (step < 4) setStep(s => s + 1);
-    else setSubmitted(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+
+  const handleNext = async () => {
+    if (step < 4) {
+      setStep(s => s + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Step 4: kirim ke Supabase
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const payload = {
+      no_registrasi: noReg,
+      // Step 1 — Data Santri
+      nama_lengkap:      step1.namaLengkap,
+      nama_panggilan:    step1.namaPanggilan,
+      jenis_kelamin:     step1.jenisKelamin,
+      tempat_lahir:      step1.tempatLahir,
+      tanggal_lahir:     step1.tanggalLahir || null,
+      nik:               step1.nik,
+      nisn:              step1.nisn,
+      asal_sekolah:      step1.asalSekolah,
+      tahun_lulus:       step1.tahunLulus ? parseInt(step1.tahunLulus) : null,
+      jenjang:           step1.jenjang,
+      gelombang:         step1.gelombang,
+      juz_hafalan:       parseInt(step1.juzHafalan) || 0,
+      surah_hafalan:     step1.surahHafalan,
+      status_asuh:       step1.statusAsuh,
+      alamat:            step1.alamat,
+      provinsi:          step1.provinsi,
+      kode_pos:          step1.kodePos,
+      // Step 2 — Data Orang Tua
+      nama_ayah:         step2.namaAyah,
+      pekerjaan_ayah:    step2.pekerjaanAyah,
+      status_ayah:       step2.statusAyah,
+      hp_ayah:           step2.hpAyah,
+      penghasilan_ayah:  step2.penghasilanAyah,
+      nama_ibu:          step2.namaIbu,
+      pekerjaan_ibu:     step2.pekerjaanIbu,
+      status_ibu:        step2.statusIbu,
+      hp_ibu:            step2.hpIbu,
+      nama_wali:         step2.namaWali,
+      hub_wali:          step2.hubWali,
+      hp_wali:           step2.hpWali,
+      alamat_wali:       step2.alamatWali,
+      kontak_darurat_nama: step2.kontakDaruratNama,
+      kontak_darurat_hp:   step2.kontakDaruratHp,
+    };
+
+    const { error } = await supabase
+      .from('pendaftaran_psb')
+      .insert([payload]);
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.error('[Supabase] Insert error:', error);
+      setSubmitError(
+        'Gagal mengirim pendaftaran. Periksa koneksi internet dan coba lagi. ' +
+        (error.message || '')
+      );
+      return;
+    }
+
+    setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -799,16 +865,25 @@ export default function Pendaftaran({ onNavigate }) {
             </div>
             <button
               onClick={handleNext}
+              disabled={isSubmitting}
               id={step === 4 ? 'btn-submit-form' : `btn-next-step-${step}`}
               style={{
                 display: 'flex', alignItems: 'center', gap: '8px',
                 padding: '12px 24px', borderRadius: '12px',
-                background: 'var(--color-primary)', color: '#fff',
-                border: 'none', cursor: 'pointer', fontWeight: '700', fontSize: '14px',
-                boxShadow: '0 4px 16px rgba(0,65,32,0.25)', transition: 'all 0.15s',
+                background: isSubmitting ? 'var(--color-surface-container)' : 'var(--color-primary)',
+                color: isSubmitting ? 'var(--color-on-surface-variant)' : '#fff',
+                border: 'none', cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                fontWeight: '700', fontSize: '14px',
+                boxShadow: isSubmitting ? 'none' : '0 4px 16px rgba(0,65,32,0.25)',
+                transition: 'all 0.15s',
               }}
             >
-              {step === 4 ? (
+              {isSubmitting ? (
+                <>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px', animation: 'spin 1s linear infinite' }}>progress_activity</span>
+                  Mengirim...
+                </>
+              ) : step === 4 ? (
                 <>
                   <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>send</span>
                   Kirim Pendaftaran
@@ -821,6 +896,14 @@ export default function Pendaftaran({ onNavigate }) {
               )}
             </button>
           </div>
+
+          {/* Error message */}
+          {submitError && (
+            <div style={{ margin: '0 28px 16px', padding: '12px 16px', borderRadius: '10px', background: 'rgba(186,26,26,0.08)', border: '1px solid rgba(186,26,26,0.2)', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-error)', flexShrink: 0 }}>error</span>
+              <span style={{ fontSize: '13px', color: 'var(--color-error)', lineHeight: '1.5' }}>{submitError}</span>
+            </div>
+          )}
         </div>
 
         {/* ── Right Sidebar ── */}
