@@ -166,7 +166,7 @@ function HeroSlider() {
           <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--color-secondary)' }}>verified</span>
         </div>
         <div>
-          <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.2 }}>Terakreditasi A</div>
+          <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.2 }}>Terakreditasi B</div>
           <div style={{ fontSize: '11px', color: 'var(--color-on-surface-variant)', lineHeight: 1.3 }}>BAN S/M & Kemenag RI</div>
         </div>
       </div>
@@ -612,7 +612,7 @@ export default function Beranda({ onNavigate }) {
                   <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'var(--color-surface-container-lowest)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
                     <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--color-primary)' }}>school</span>
                   </div>
-                  <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: 'var(--color-tertiary-fixed)', color: 'var(--color-on-tertiary-container)', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>MTs & MA Terakreditasi A</div>
+                  <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: 'var(--color-tertiary-fixed)', color: 'var(--color-on-tertiary-container)', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>MTs & MA Terakreditasi B</div>
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: '700', marginBottom: '12px' }}>Madrasah Diniyah & Salafiyah</h3>
                   <p style={{ fontSize: '14px', color: 'var(--color-on-primary-container)', lineHeight: '1.7', marginBottom: '16px' }}>
                     Pendidikan formal berjenjang MTs & MA yang terintegrasi dengan penguatan akidah akhlak, syariah, kurikulum nasional, dan kurikulum Cambridge.
@@ -814,7 +814,7 @@ export default function Beranda({ onNavigate }) {
                 </p>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--color-surface-container-lowest)', padding: '6px 14px', borderRadius: '999px', boxShadow: 'var(--shadow-card)' }}>
                   <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-tertiary)' }}>verified</span>
-                  <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--color-primary)' }}>Terakreditasi A (Unggul)</span>
+                  <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--color-primary)' }}>Terakreditasi B</span>
                 </div>
               </div>
 
