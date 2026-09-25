@@ -106,11 +106,11 @@ const NEWS_ITEMS = [
 
 const GALLERY_FILTERS = ['Semua', 'Tahfidz & Halaqah', 'Kajian Kitab', 'Kemandirian & Ekskul', 'Fasilitas Kampus'];
 const PRAYER_TIMES_BASE = [
-  { name: 'Subuh',   time: '04:38', h: 4,  m: 38 },
+  { name: 'Subuh', time: '04:38', h: 4, m: 38 },
   { name: 'Dzuhur', time: '11:54', h: 11, m: 54 },
-  { name: 'Ashar',  time: '15:16', h: 15, m: 16 },
-  { name: 'Maghrib',time: '17:49', h: 17, m: 49 },
-  { name: 'Isya',   time: '19:02', h: 19, m: 2  },
+  { name: 'Ashar', time: '15:16', h: 15, m: 16 },
+  { name: 'Maghrib', time: '17:49', h: 17, m: 49 },
+  { name: 'Isya', time: '19:02', h: 19, m: 2 },
 ];
 
 function getPrayerTimes() {
@@ -183,73 +183,73 @@ function HeroSlider() {
         onMouseEnter={() => clearInterval(timerRef.current)}
         onMouseLeave={startAuto}
       >
-      {/* Slides */}
-      <div style={{ position: 'relative', width: '100%', height: '480px' }}>
-        {SLIDES.map((s, i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute', inset: 0,
-              opacity: i === current ? 1 : 0,
-              transition: 'opacity 0.7s ease',
-              pointerEvents: i === current ? 'auto' : 'none',
-            }}
-          >
-            <img src={s.img} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,65,32,0.9) 0%, rgba(0,65,32,0.3) 50%, transparent 100%)' }} />
-          </div>
-        ))}
-
-        {/* Caption card */}
-        <div style={{
-          position: 'absolute', bottom: '48px', left: '20px', right: '20px',
-          padding: '16px', borderRadius: '16px',
-          background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)',
-          boxShadow: '0 8px 24px rgba(0,0,0,0.12)', border: '1px solid rgba(255,255,255,0.4)',
-          display: 'flex', alignItems: 'center', gap: '12px',
-        }}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: slide.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '26px', color: '#fff' }}>{slide.icon}</span>
-          </div>
-          <div>
-            <div style={{ fontSize: '15px', fontWeight: '700', color: 'var(--color-primary)' }}>{slide.title}</div>
-            <div style={{ fontSize: '13px', color: 'var(--color-on-surface-variant)' }}>{slide.sub}</div>
-          </div>
-        </div>
-
-        {/* Arrows */}
-        <button
-          aria-label="Slide sebelumnya"
-          onClick={() => { go(current - 1); startAuto(); }}
-          style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.82)', backdropFilter: 'blur(8px)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.15)', color: 'var(--color-primary)' }}
-        >
-          <span className="material-symbols-outlined">chevron_left</span>
-        </button>
-        <button
-          aria-label="Slide berikutnya"
-          onClick={() => { go(current + 1); startAuto(); }}
-          style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.82)', backdropFilter: 'blur(8px)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.15)', color: 'var(--color-primary)' }}
-        >
-          <span className="material-symbols-outlined">chevron_right</span>
-        </button>
-
-        {/* Dots */}
-        <div style={{ position: 'absolute', bottom: '12px', left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: '8px', zIndex: 10 }}>
-          {SLIDES.map((_, i) => (
-            <button
+        {/* Slides */}
+        <div style={{ position: 'relative', width: '100%', height: '480px' }}>
+          {SLIDES.map((s, i) => (
+            <div
               key={i}
-              aria-label={`Ke slide ${i + 1}`}
-              onClick={() => { go(i); startAuto(); }}
               style={{
-                width: i === current ? '24px' : '8px',
-                height: '8px', borderRadius: '999px', border: 'none', cursor: 'pointer',
-                background: i === current ? 'var(--color-secondary)' : 'rgba(255,255,255,0.7)',
-                transition: 'all 0.3s ease',
+                position: 'absolute', inset: 0,
+                opacity: i === current ? 1 : 0,
+                transition: 'opacity 0.7s ease',
+                pointerEvents: i === current ? 'auto' : 'none',
               }}
-            />
+            >
+              <img src={s.img} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,65,32,0.9) 0%, rgba(0,65,32,0.3) 50%, transparent 100%)' }} />
+            </div>
           ))}
+
+          {/* Caption card */}
+          <div style={{
+            position: 'absolute', bottom: '48px', left: '20px', right: '20px',
+            padding: '16px', borderRadius: '16px',
+            background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.12)', border: '1px solid rgba(255,255,255,0.4)',
+            display: 'flex', alignItems: 'center', gap: '12px',
+          }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: slide.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '26px', color: '#fff' }}>{slide.icon}</span>
+            </div>
+            <div>
+              <div style={{ fontSize: '15px', fontWeight: '700', color: 'var(--color-primary)' }}>{slide.title}</div>
+              <div style={{ fontSize: '13px', color: 'var(--color-on-surface-variant)' }}>{slide.sub}</div>
+            </div>
+          </div>
+
+          {/* Arrows */}
+          <button
+            aria-label="Slide sebelumnya"
+            onClick={() => { go(current - 1); startAuto(); }}
+            style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.82)', backdropFilter: 'blur(8px)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.15)', color: 'var(--color-primary)' }}
+          >
+            <span className="material-symbols-outlined">chevron_left</span>
+          </button>
+          <button
+            aria-label="Slide berikutnya"
+            onClick={() => { go(current + 1); startAuto(); }}
+            style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.82)', backdropFilter: 'blur(8px)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.15)', color: 'var(--color-primary)' }}
+          >
+            <span className="material-symbols-outlined">chevron_right</span>
+          </button>
+
+          {/* Dots */}
+          <div style={{ position: 'absolute', bottom: '12px', left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: '8px', zIndex: 10 }}>
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Ke slide ${i + 1}`}
+                onClick={() => { go(i); startAuto(); }}
+                style={{
+                  width: i === current ? '24px' : '8px',
+                  height: '8px', borderRadius: '999px', border: 'none', cursor: 'pointer',
+                  background: i === current ? 'var(--color-secondary)' : 'rgba(255,255,255,0.7)',
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
@@ -545,7 +545,7 @@ export default function Beranda({ onNavigate }) {
               </div>
 
               <p style={{ fontSize: '15px', color: 'var(--color-on-surface-variant)', lineHeight: '1.7' }}>
-                Sejak didirikan pada tahun 1998, Pondok Pesantren Yatim Al-Hanif berkomitmen mencetak insan mukmin yang berjiwa ikhlas, teguh berpegang pada ajaran Ahlussunnah wal Jama'ah, serta cakap memimpin perubahan dengan penguasaan sains, teknologi, dan kemandirian berkah.
+                Sejak didirikan pada tahun 2012, Pondok Pesantren Yatim Al-Hanif berkomitmen mencetak insan mukmin yang berjiwa ikhlas, teguh berpegang pada ajaran Ahlussunnah wal Jama'ah, serta cakap memimpin perubahan dengan penguasaan sains, teknologi, dan kemandirian berkah.
               </p>
 
               {/* Panca Jiwa */}
