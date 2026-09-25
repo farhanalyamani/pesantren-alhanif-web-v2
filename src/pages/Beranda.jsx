@@ -105,13 +105,28 @@ const NEWS_ITEMS = [
 ];
 
 const GALLERY_FILTERS = ['Semua', 'Tahfidz & Halaqah', 'Kajian Kitab', 'Kemandirian & Ekskul', 'Fasilitas Kampus'];
-const PRAYER_TIMES = [
-  { name: 'Subuh', time: '04:38', active: false },
-  { name: 'Dzuhur', time: '11:54', active: false },
-  { name: 'Ashar', time: '15:16', active: true },
-  { name: 'Maghrib', time: '17:49', active: false },
-  { name: 'Isya', time: '19:02', active: false },
+const PRAYER_TIMES_BASE = [
+  { name: 'Subuh',   time: '04:38', h: 4,  m: 38 },
+  { name: 'Dzuhur', time: '11:54', h: 11, m: 54 },
+  { name: 'Ashar',  time: '15:16', h: 15, m: 16 },
+  { name: 'Maghrib',time: '17:49', h: 17, m: 49 },
+  { name: 'Isya',   time: '19:02', h: 19, m: 2  },
 ];
+
+function getPrayerTimes() {
+  // Waktu sekarang dalam WIB (UTC+7)
+  const now = new Date();
+  const wibMinutes = (now.getUTCHours() + 7) % 24 * 60 + now.getUTCMinutes();
+
+  // Cari waktu shalat yang sudah lewat paling akhir = yang sedang aktif
+  let activeIdx = 0;
+  for (let i = 0; i < PRAYER_TIMES_BASE.length; i++) {
+    const pMin = PRAYER_TIMES_BASE[i].h * 60 + PRAYER_TIMES_BASE[i].m;
+    if (wibMinutes >= pMin) activeIdx = i;
+  }
+
+  return PRAYER_TIMES_BASE.map((p, i) => ({ ...p, active: i === activeIdx }));
+}
 
 /* ══════════════════════════════════════════════════════
    Sub-components
@@ -351,12 +366,12 @@ export default function Beranda({ onNavigate }) {
               <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#fff' }}>schedule</span>
               </div>
-              <span style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Jadwal Ibadah Kampus Al-Hanif</span>
+              <span style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Jadwal Ibadah Pesantren Al-Hanif</span>
               <span style={{ color: 'var(--color-outline-variant)' }}>•</span>
               <span style={{ fontSize: '12px', color: 'var(--color-on-surface-variant)' }}>Waktu Indonesia Barat (WIB)</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-              {PRAYER_TIMES.map((p) => (
+              {getPrayerTimes().map((p) => (
                 <div key={p.name} style={{
                   display: 'flex', alignItems: 'center', gap: '6px',
                   padding: '4px 12px', borderRadius: '999px',
