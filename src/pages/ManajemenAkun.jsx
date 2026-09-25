@@ -87,31 +87,40 @@ export default function ManajemenAkun() {
 
     try {
       if (editingId) {
-        // Update data lokal saja (nanti konek ke Supabase profiles)
+        // Update lokal (nanti konek ke tabel profiles Supabase)
         setAccounts(prev => prev.map(a => a.id === editingId
-          ? { ...a, nama: form.nama, email: form.email, jabatan: form.jabatan, hp: form.hp }
+          ? { ...a, nama: form.nama, jabatan: form.jabatan, hp: form.hp }
           : a
         ));
         showToast('success', `Data akun ${form.nama} berhasil diperbarui.`);
       } else {
-        // Buat akun via Supabase Auth (invite link / create user)
-        if (form.sendInvite) {
-          // Kirim magic link / invite email
-          // Di production: gunakan supabase.auth.admin.inviteUserByEmail (butuh service role key di edge function)
-          // Untuk demo: tambah ke list lokal
-          showToast('success', `Undangan login dikirim ke ${form.email}. Asatidz perlu set password via email.`);
-        } else {
-          // Create dengan password langsung
-          // const { error } = await supabase.auth.admin.createUser({ email: form.email, password: form.password, ... });
-          // ↑ Butuh Edge Function dengan service role key
-          showToast('success', `Akun ${form.nama} berhasil dibuat. Email: ${form.email}`);
+        // Panggil Edge Function create-user
+        const { data: sessionData } = await supabase.auth.getSession();
+        const token = sessionData?.session?.access_token;
+
+        const res = await supabase.functions.invoke('create-user', {
+          body: {
+            email: form.email.trim(),
+            password: form.sendInvite ? undefined : form.password,
+            nama: form.nama.trim(),
+            jabatan: form.jabatan,
+            hp: form.hp.trim(),
+            sendInvite: form.sendInvite,
+          },
+        });
+
+        if (res.error || res.data?.error) {
+          throw new Error(res.data?.error || res.error?.message || 'Gagal membuat akun.');
         }
+
+        showToast('success', res.data?.message || `Akun ${form.nama} berhasil dibuat.`);
+
         const newAcc = {
           id: Date.now(),
-          nama: form.nama,
-          email: form.email,
+          nama: form.nama.trim(),
+          email: form.email.trim(),
           jabatan: form.jabatan,
-          hp: form.hp,
+          hp: form.hp.trim(),
           status: 'aktif',
           createdAt: new Date().toISOString().split('T')[0],
         };
