@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import supabase from '../lib/supabase';
+import { logoAlhanif } from '../assets/images/index.js';
 
 /* ── Stitch Design: Login Portal Santri & Wali ── */
 
@@ -120,9 +121,11 @@ export default function Login({ onNavigate, onLoginSuccess }) {
 
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-          <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <span className="material-symbols-outlined" style={{ fontSize: '24px', color: '#D4AF37' }}>mosque</span>
-          </div>
+          <img
+            src={logoAlhanif}
+            alt="Logo Al-Hanif"
+            style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)', background: '#fff' }}
+          />
           <div>
             <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '18px', fontWeight: '700', color: '#fff', lineHeight: 1.1 }}>Al-Hanif</div>
             <div style={{ fontSize: '10px', fontWeight: '600', color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Pondok Pesantren Yatim</div>

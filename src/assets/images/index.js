@@ -5,6 +5,10 @@ export { default as heroSlide3 } from './hero-slide-3.jpg';
 export { default as heroSlide4 } from './hero-slide-4.jpg';
 export { default as heroSlide5 } from './hero-slide-5.jpg';
 
+// Logo
+export { default as logoAlhanif } from './logo-alhanif.jpeg';
+
+
 // Kyai / pengasuh
 export { default as kyaiProfile } from './kyai-profile.jpg';
 

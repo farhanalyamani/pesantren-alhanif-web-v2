@@ -4,6 +4,7 @@ import {
   kyaiProfile,
   gallery1, gallery2, gallery3, gallery4, gallery5, gallery6,
   news1, news2, news3,
+  logoAlhanif,
 } from '../assets/images/index.js';
 
 /* ── Slide data ── */
@@ -293,10 +294,12 @@ export default function Beranda({ onNavigate }) {
         {/* Main nav */}
         <div style={{ background: 'rgba(249,249,255,0.96)', backdropFilter: 'blur(16px)' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', height: '72px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--color-primary-container)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span className="material-symbols-outlined" style={{ color: 'var(--color-on-primary)', fontSize: '22px' }}>mosque</span>
-              </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <img
+                src={logoAlhanif}
+                alt="Logo Al-Hanif"
+                style={{ width: '44px', height: '44px', borderRadius: '10px', objectFit: 'cover', border: '1px solid var(--color-secondary-container)' }}
+              />
               <div>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.1 }}>Al-Hanif</div>
                 <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Pondok Pesantren Yatim</div>
