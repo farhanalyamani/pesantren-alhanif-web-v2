@@ -1,4 +1,5 @@
 import { navItems } from '../data/mockData';
+import { logoAlhanif } from '../assets/images/index.js';
 
 export default function Sidebar({ activePage, onNavigate }) {
   return (
@@ -6,9 +7,12 @@ export default function Sidebar({ activePage, onNavigate }) {
       <div className="sidebar-top">
         {/* Brand */}
         <div className="sidebar-brand">
-          <div className="sidebar-brand-icon">
-            <span className="material-symbols-outlined">mosque</span>
-          </div>
+          <img
+            src={logoAlhanif}
+            alt="Logo Al-Hanif"
+            className="sidebar-brand-icon"
+            style={{ objectFit: 'cover' }}
+          />
           <div className="sidebar-brand-text">
             <span className="sidebar-brand-title">SIM Pesantren</span>
             <span className="sidebar-brand-sub">Yatim Al-Hanif</span>

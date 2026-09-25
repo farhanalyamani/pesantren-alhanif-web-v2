@@ -184,16 +184,8 @@ input, select, textarea {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, var(--color-primary-container) 0%, var(--color-secondary) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-}
-
-.sidebar-brand-icon .material-symbols-outlined {
-  color: var(--color-on-primary);
-  font-size: 20px;
+  border: 1px solid var(--color-secondary-container);
 }
 
 .sidebar-brand-text {

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import supabase from '../lib/supabase';
+import { logoAlhanif } from '../assets/images/index.js';
 
 /* ── Constants ── */
 const STEPS = [
@@ -714,9 +715,11 @@ export default function Pendaftaran({ onNavigate }) {
             onClick={() => onNavigate('beranda')}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
           >
-            <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'var(--color-primary-container)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span className="material-symbols-outlined" style={{ color: 'var(--color-on-primary)', fontSize: '20px' }}>mosque</span>
-            </div>
+            <img
+              src={logoAlhanif}
+              alt="Logo Al-Hanif"
+              style={{ width: '36px', height: '36px', borderRadius: '8px', objectFit: 'cover', border: '1px solid var(--color-secondary-container)' }}
+            />
             <div style={{ textAlign: 'left' }}>
               <div style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.1 }}>Al-Hanif</div>
               <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Pondok Pesantren Yatim</div>
