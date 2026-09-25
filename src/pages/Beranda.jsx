@@ -215,21 +215,18 @@ function HeroSlider() {
         </div>
       </div>
 
-      {/* Floating badge */}
-      <div style={{
-        position: 'absolute', top: '-16px', right: '-16px',
-        background: 'white', padding: '14px', borderRadius: '16px',
-        boxShadow: '0 12px 32px rgba(0,0,0,0.12)', display: 'flex', alignItems: 'center', gap: '10px',
-        border: '2px solid var(--color-secondary-container)', zIndex: 20,
-      }}>
-        <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--color-secondary-container)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '22px', color: 'var(--color-on-secondary-container)' }}>verified</span>
+        {/* Akreditasi badge — di dalam carousel, di atas caption */}
+        <div style={{
+          position: 'absolute', top: '12px', left: '12px',
+          background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)',
+          padding: '6px 12px 6px 8px', borderRadius: '999px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+          display: 'flex', alignItems: 'center', gap: '6px',
+          border: '1px solid rgba(255,255,255,0.8)', zIndex: 15,
+        }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--color-secondary)' }}>verified</span>
+          <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--color-primary)', whiteSpace: 'nowrap' }}>Terakreditasi A · BAN S/M & Kemenag RI</span>
         </div>
-        <div>
-          <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-primary)' }}>Terakreditasi A</div>
-          <div style={{ fontSize: '11px', color: 'var(--color-on-surface-variant)' }}>BAN S/M & Kemenag RI</div>
-        </div>
-      </div>
     </div>
   );
 }
