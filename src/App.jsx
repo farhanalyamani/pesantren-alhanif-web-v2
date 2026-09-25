@@ -115,7 +115,7 @@ export default function App() {
     <div className="app-layout">
       <Sidebar activePage={activePage} onNavigate={handleNavigate} />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+        <Header searchQuery={searchQuery} onSearchChange={setSearchQuery} onNavigate={handleNavigate} />
         <main className="main-content">
           {/* Back to website button */}
           <div style={{ paddingTop: 'var(--space-lg)', paddingBottom: 0, display: 'flex', justifyContent: 'flex-end' }}>
