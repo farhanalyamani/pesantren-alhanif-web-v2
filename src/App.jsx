@@ -8,11 +8,13 @@ import Dashboard from './pages/Dashboard';
 import DataSantri from './pages/DataSantri';
 import Placeholder from './pages/Placeholder';
 import PortalWali from './pages/PortalWali';
+import ManajemenAkun from './pages/ManajemenAkun';
 
 // Pages that show inside the admin shell (sidebar + header)
 const ADMIN_PAGES = {
   dashboard: { component: Dashboard },
   'data-santri': { component: DataSantri },
+  'manajemen-akun': { component: ManajemenAkun },
   tahfidz: {
     component: () => (
       <Placeholder

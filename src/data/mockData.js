@@ -287,12 +287,14 @@ export const kpiData = [
 ];
 
 export const navItems = [
-  { id: 'dashboard', icon: 'grid_view', label: 'Dashboard Ringkasan' },
-  { id: 'data-santri', icon: 'groups', label: 'Data Santri' },
-  { id: 'tahfidz', icon: 'menu_book', label: "Mutaba'ah & Tahfidz" },
-  { id: 'presensi', icon: 'fact_check', label: 'Presensi & Disiplin', badge: 3 },
-  { id: 'nilai', icon: 'school', label: 'Nilai Madrasah' },
-  { id: 'perizinan', icon: 'door_sliding', label: 'Perizinan Santri' },
-  { id: 'keuangan', icon: 'volunteer_activism', label: 'Keuangan & Donatur' },
-  { id: 'laporan', icon: 'summarize', label: 'Laporan Santri' },
+  { id: 'dashboard',      icon: 'grid_view',          label: 'Dashboard Ringkasan' },
+  { id: 'data-santri',    icon: 'groups',             label: 'Data Santri' },
+  { id: 'tahfidz',        icon: 'menu_book',          label: "Mutaba'ah & Tahfidz" },
+  { id: 'presensi',       icon: 'fact_check',         label: 'Presensi & Disiplin', badge: 3 },
+  { id: 'nilai',          icon: 'school',             label: 'Nilai Madrasah' },
+  { id: 'perizinan',      icon: 'door_sliding',       label: 'Perizinan Santri' },
+  { id: 'keuangan',       icon: 'volunteer_activism', label: 'Keuangan & Donatur' },
+  { id: 'laporan',        icon: 'summarize',          label: 'Laporan Santri' },
+  { id: '__divider__',    icon: null,                  label: 'Admin' },
+  { id: 'manajemen-akun', icon: 'manage_accounts',   label: 'Manajemen Akun' },
 ];

@@ -31,20 +31,30 @@ export default function Sidebar({ activePage, onNavigate }) {
         {/* Navigation */}
         <nav className="sidebar-nav">
           <div className="nav-section-label">Menu Utama</div>
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              className={`nav-item ${activePage === item.id ? 'active' : ''}`}
-              onClick={() => onNavigate(item.id)}
-              aria-current={activePage === item.id ? 'page' : undefined}
-            >
-              <span className="material-symbols-outlined">{item.icon}</span>
-              <span>{item.label}</span>
-              {item.badge && (
-                <span className="nav-item-badge">{item.badge}</span>
-              )}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            if (item.id === '__divider__') {
+              return (
+                <div key="__divider__" style={{ margin: '12px 0 4px', padding: '0 12px' }}>
+                  <div style={{ height: '1px', background: 'var(--color-outline-variant)', marginBottom: '10px', opacity: 0.4 }} />
+                  <div className="nav-section-label" style={{ marginBottom: 0 }}>{item.label}</div>
+                </div>
+              );
+            }
+            return (
+              <button
+                key={item.id}
+                className={`nav-item ${activePage === item.id ? 'active' : ''}`}
+                onClick={() => onNavigate(item.id)}
+                aria-current={activePage === item.id ? 'page' : undefined}
+              >
+                <span className="material-symbols-outlined">{item.icon}</span>
+                <span>{item.label}</span>
+                {item.badge && (
+                  <span className="nav-item-badge">{item.badge}</span>
+                )}
+              </button>
+            );
+          })}
         </nav>
       </div>
 
