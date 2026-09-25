@@ -136,17 +136,38 @@ function HeroSlider() {
   const slide = SLIDES[current];
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        borderRadius: '120px 120px 24px 24px',
-        overflow: 'hidden',
-        background: 'var(--color-surface-container)',
-        boxShadow: '0 24px 64px -8px rgba(20,90,50,0.25)',
-      }}
-      onMouseEnter={() => clearInterval(timerRef.current)}
-      onMouseLeave={startAuto}
-    >
+    <div style={{ position: 'relative' }}>
+
+      {/* Badge Terakreditasi — DI LUAR carousel overflow:hidden, pojok kanan atas */}
+      <div style={{
+        position: 'absolute', top: '-14px', right: '-14px',
+        background: 'white', padding: '12px 16px 12px 12px',
+        borderRadius: '16px', zIndex: 30,
+        boxShadow: '0 8px 24px rgba(0,0,0,0.13)',
+        border: '2px solid var(--color-secondary-container)',
+        display: 'flex', alignItems: 'center', gap: '10px',
+      }}>
+        <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'var(--color-secondary-container)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--color-secondary)' }}>verified</span>
+        </div>
+        <div>
+          <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.2 }}>Terakreditasi A</div>
+          <div style={{ fontSize: '11px', color: 'var(--color-on-surface-variant)', lineHeight: 1.3 }}>BAN S/M & Kemenag RI</div>
+        </div>
+      </div>
+
+      {/* Carousel — overflow:hidden tetap di sini, badge sudah di luar */}
+      <div
+        style={{
+          position: 'relative',
+          borderRadius: '120px 120px 24px 24px',
+          overflow: 'hidden',
+          background: 'var(--color-surface-container)',
+          boxShadow: '0 24px 64px -8px rgba(20,90,50,0.25)',
+        }}
+        onMouseEnter={() => clearInterval(timerRef.current)}
+        onMouseLeave={startAuto}
+      >
       {/* Slides */}
       <div style={{ position: 'relative', width: '100%', height: '480px' }}>
         {SLIDES.map((s, i) => (
@@ -214,19 +235,7 @@ function HeroSlider() {
           ))}
         </div>
       </div>
-
-        {/* Akreditasi badge — di dalam carousel, di atas caption */}
-        <div style={{
-          position: 'absolute', top: '12px', left: '12px',
-          background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(8px)',
-          padding: '6px 12px 6px 8px', borderRadius: '999px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
-          display: 'flex', alignItems: 'center', gap: '6px',
-          border: '1px solid rgba(255,255,255,0.8)', zIndex: 15,
-        }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--color-secondary)' }}>verified</span>
-          <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--color-primary)', whiteSpace: 'nowrap' }}>Terakreditasi A · BAN S/M & Kemenag RI</span>
-        </div>
+      </div>
     </div>
   );
 }
