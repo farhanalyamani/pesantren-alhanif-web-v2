@@ -96,7 +96,7 @@ export default function App() {
         onLoginSuccess={(role, user) => {
           console.log('[Login] Masuk sebagai', role, user?.email);
           if (role === 'wali') handleNavigate('portal-wali');
-          else handleNavigate('dashboard');
+          else handleNavigate('dashboard'); // staf & admin → dashboard
         }}
       />
     );

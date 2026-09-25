@@ -43,7 +43,7 @@ const inputStyle = {
 };
 
 export default function Login({ onNavigate, onLoginSuccess }) {
-  const [role, setRole] = useState('wali'); // 'wali' | 'staf'
+  const [role, setRole] = useState('wali'); // 'wali' | 'staf' | 'admin'
   const [nisn, setNisn]           = useState('');
   const [email, setEmail]         = useState('');
   const [password, setPassword]   = useState('');
@@ -60,7 +60,7 @@ export default function Login({ onNavigate, onLoginSuccess }) {
     setLoading(true);
     setError('');
 
-    // Staf login menggunakan email, Wali menggunakan NISN (email-style: nisn@alhanif.local)
+    // Wali: NISN@portal.alhanif.local | Staf & Admin: email langsung
     const loginEmail = role === 'wali'
       ? `${nisn.trim()}@portal.alhanif.local`
       : email.trim();
@@ -95,7 +95,7 @@ export default function Login({ onNavigate, onLoginSuccess }) {
 
     localStorage.setItem('alhanif_role', role);
     if (onLoginSuccess) onLoginSuccess(role, data.user);
-    else onNavigate('dashboard');
+    else onNavigate(role === 'wali' ? 'portal-wali' : 'dashboard');
   };
 
   return (
@@ -208,16 +208,17 @@ export default function Login({ onNavigate, onLoginSuccess }) {
               <div style={{ fontSize: '11px', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
                 Pilih Hak Akses Masuk
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
                 {[
-                  { id: 'wali', label: 'Wali Santri', icon: 'family_restroom' },
-                  { id: 'staf', label: 'Asatidz / Staf', icon: 'badge' },
+                  { id: 'wali',  label: 'Wali Santri',    icon: 'family_restroom' },
+                  { id: 'staf',  label: 'Asatidz / Staf', icon: 'badge' },
+                  { id: 'admin', label: 'Admin',           icon: 'admin_panel_settings' },
                 ].map(r => (
                   <button
                     key={r.id}
                     onClick={() => { setRole(r.id); setError(''); setForgotMode(false); setForgotSent(false); }}
                     style={{
-                      padding: '14px 16px',
+                      padding: '14px 8px',
                       borderRadius: '12px',
                       border: role === r.id ? '2px solid #145A32' : '2px solid #E2E8F0',
                       background: role === r.id ? 'rgba(20,90,50,0.04)' : '#fff',
@@ -227,7 +228,7 @@ export default function Login({ onNavigate, onLoginSuccess }) {
                     }}
                   >
                     <span className="material-symbols-outlined" style={{ fontSize: '22px', color: role === r.id ? '#145A32' : '#94A3B8' }}>{r.icon}</span>
-                    <span style={{ fontSize: '13px', fontWeight: '700', color: role === r.id ? '#145A32' : '#64748B' }}>{r.label}</span>
+                    <span style={{ fontSize: '12px', fontWeight: '700', color: role === r.id ? '#145A32' : '#64748B', textAlign: 'center', lineHeight: 1.2 }}>{r.label}</span>
                   </button>
                 ))}
               </div>
@@ -256,10 +257,12 @@ export default function Login({ onNavigate, onLoginSuccess }) {
                   </h2>
                   <p style={{ fontSize: '13px', color: '#64748B', lineHeight: '1.6' }}>
                     {forgotMode
-                      ? 'Masukkan email atau NISN untuk menerima link reset kata sandi.'
+                      ? 'Masukkan email untuk menerima link reset kata sandi.'
                       : role === 'wali'
                         ? 'Silakan masukkan NISN/Nomor Induk Santri putra/putri Anda dan kata sandi wali santri terdaftar.'
-                        : 'Masukkan email dan kata sandi akun Asatidz/Staf Anda.'}
+                        : role === 'admin'
+                          ? 'Masukkan email dan kata sandi akun Administrator sistem.'
+                          : 'Masukkan email dan kata sandi akun Asatidz/Staf Anda.'}
                   </p>
                 </div>
 
