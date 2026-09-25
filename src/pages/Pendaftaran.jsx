@@ -52,9 +52,9 @@ const PERSYARATAN = [
 ];
 
 const KEUNGGULAN = [
-  { icon: 'payments', title: '100% Gratis', sub: 'Tanpa biaya SPP, asrama, makan & kitab' },
+  { icon: 'payments', title: '100% Gratis', sub: 'Tanpa biaya SPP, asrama & makan' },
   { icon: 'menu_book', title: 'Tahfidz 30 Juz', sub: 'Target hafal penuh bersanad muttashil' },
-  { icon: 'school', title: 'Berakreditasi A', sub: 'MTs & MA diakui Kemenag RI' },
+  { icon: 'school', title: 'Berakreditasi B', sub: 'MTs & MA diakui Kemenag RI' },
   { icon: 'public', title: 'Bilingual', sub: 'Aktif berbahasa Arab & Inggris sehari-hari' },
 ];
 
@@ -748,7 +748,7 @@ export default function Pendaftaran({ onNavigate }) {
               Formulir Pendaftaran Online
             </h1>
             <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.75)', lineHeight: '1.6' }}>
-              Isi formulir dengan lengkap dan benar. Seluruh pendidikan 100% gratis untuk santri yatim & dhuafa.
+              Isi formulir dengan lengkap dan benar. SPP, asrama & konsumsi harian 100% gratis untuk santri yatim & dhuafa. Kitab, seragam, lemari & kasur pribadi ditanggung mandiri.
             </p>
           </div>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>

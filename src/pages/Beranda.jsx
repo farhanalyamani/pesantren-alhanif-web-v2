@@ -44,7 +44,7 @@ const STATS = [
   { icon: 'group', value: '1.250+', label: 'Santri Aktif Mukim', sub: 'Berasal dari 34 Provinsi & Mancanegara' },
   { icon: 'menu_book', value: '300+', label: 'Hafizh/Hafizhah 30 Juz', sub: 'Lulus bersanad muttashil rasmi' },
   { icon: 'school', value: '50+', label: 'Dewan Asatidz & Mursyid', sub: 'Alumni Al-Azhar, Hadramaut, & PTN' },
-  { icon: 'payments', value: 'Rp 0,-', label: '100% Bebas Biaya', sub: 'SPP, Asrama, Makan 3x & Kitab Gratis' },
+  { icon: 'payments', value: 'Rp 0,-', label: '100% Bebas Biaya', sub: 'SPP, Asrama & Makan 3x Gratis' },
 ];
 
 const GALLERY_ITEMS = [
@@ -409,7 +409,7 @@ export default function Beranda({ onNavigate }) {
                 </div>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', alignSelf: 'flex-start', padding: '6px 14px', borderRadius: '999px', background: 'var(--color-tertiary-fixed)', color: 'var(--color-on-tertiary-container)', border: '1px solid rgba(115,92,0,0.2)', fontSize: '12px', fontWeight: '700' }}>
                   <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-tertiary)' }}>volunteer_activism</span>
-                  100% Gratis — Bebas Biaya Pendidikan, Asrama & Konsumsi Sepenuhnya
+                  100% Gratis — Bebas Biaya SPP, Asrama & Konsumsi Sepenuhnya
                 </div>
               </div>
 
@@ -418,7 +418,7 @@ export default function Beranda({ onNavigate }) {
               </h1>
 
               <p style={{ fontSize: '17px', color: 'var(--color-on-surface-variant)', lineHeight: '1.7', maxWidth: '580px' }}>
-                Pondok Pesantren Yatim Al-Hanif memadukan kedalaman ilmu salafiyah, tahfidzul Qur'an bersanad, dan kurikulum sains unggulan. <strong>100% Gratis tanpa dipungut biaya</strong> — seluruh santri yatim & dhuafa dibebaskan dari SPP, tempat tinggal asrama, kitab, seragam, serta konsumsi harian.
+                Pondok Pesantren Yatim Al-Hanif memadukan kedalaman ilmu salafiyah, tahfidzul Qur'an bersanad, dan kurikulum sains unggulan. <strong>100% Gratis tanpa dipungut biaya</strong> — seluruh santri yatim &amp; dhuafa dibebaskan dari SPP, tempat tinggal asrama, serta konsumsi harian. <em>Biaya kitab, seragam, lemari &amp; kasur pribadi ditanggung mandiri.</em>
               </p>
 
               <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -485,7 +485,7 @@ export default function Beranda({ onNavigate }) {
                     { icon: 'school', title: 'Bebas SPP', sub: 'Formal & Diniyah' },
                     { icon: 'cottage', title: 'Asrama Gratis', sub: 'Hunian Bersih & Nyaman' },
                     { icon: 'restaurant', title: 'Makan 3x Sehari', sub: 'Menu Bergizi Terjamin' },
-                    { icon: 'menu_book', title: 'Kitab & Seragam', sub: 'Disediakan Lengkap' },
+                    { icon: 'menu_book', title: 'Kitab & Seragam', sub: 'Bayar Mandiri (Terjangkau)' },
                   ].map((item, i) => (
                     <div key={i} style={{ padding: '16px', borderRadius: '16px', background: 'var(--color-surface-container-low)', textAlign: 'center', border: '1px solid rgba(192,201,190,0.2)' }}>
                       <span className="material-symbols-outlined" style={{ fontSize: '26px', color: 'var(--color-secondary)', display: 'block', marginBottom: '4px' }}>{item.icon}</span>
