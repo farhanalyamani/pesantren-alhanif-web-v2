@@ -9,6 +9,7 @@ import DataSantri from './pages/DataSantri';
 import Placeholder from './pages/Placeholder';
 import PortalWali from './pages/PortalWali';
 import ManajemenAkun from './pages/ManajemenAkun';
+import AdminPanel from './pages/AdminPanel';
 
 // Pages that show inside the admin shell (sidebar + header)
 const ADMIN_PAGES = {
@@ -97,8 +98,9 @@ export default function App() {
         onNavigate={handleNavigate}
         onLoginSuccess={(role, user) => {
           console.log('[Login] Masuk sebagai', role, user?.email);
-          if (role === 'wali') handleNavigate('portal-wali');
-          else handleNavigate('dashboard'); // staf & admin → dashboard
+          if (role === 'wali')  handleNavigate('portal-wali');
+          else if (role === 'admin') handleNavigate('admin-panel');
+          else handleNavigate('dashboard'); // staf
         }}
       />
     );
@@ -107,6 +109,11 @@ export default function App() {
   // ── Portal Wali Santri ──
   if (activePage === 'portal-wali') {
     return <PortalWali onNavigate={handleNavigate} />;
+  }
+
+  // ── Admin Panel (layout tersendiri) ──
+  if (activePage === 'admin-panel') {
+    return <AdminPanel onNavigate={handleNavigate} />;
   }
 
   // ── Admin shell layout ──
