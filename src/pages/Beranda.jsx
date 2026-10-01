@@ -766,6 +766,13 @@ function ProgramSection() {
 export default function Beranda({ onNavigate }) {
   const [activeFilter, setActiveFilter] = useState('Semua');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth <= 768);
+
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
 
   return (
     <div style={{ width: '100%', background: 'var(--color-surface)' }}>
