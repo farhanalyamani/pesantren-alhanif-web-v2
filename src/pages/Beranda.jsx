@@ -258,6 +258,110 @@ function HeroSlider() {
 
 
 
+
+/* ═══════════════════════════════════════════════════
+   BerandaFooter — Mobile: 1-col | Desktop: 3-col
+═══════════════════════════════════════════════════ */
+function BerandaFooter({ isMobile }) {
+  return (
+    <footer style={{ background: 'var(--color-surface-container-low)', padding: isMobile ? '36px 16px 24px' : '64px 48px 40px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '4fr 3fr 5fr',
+          gap: isMobile ? '28px' : '40px',
+          paddingBottom: isMobile ? '28px' : '48px',
+          borderBottom: '1px solid var(--color-outline-variant)',
+        }}>
+          {/* Brand */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--color-primary-container)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span className="material-symbols-outlined" style={{ color: 'var(--color-on-primary)', fontSize: '22px' }}>mosque</span>
+              </div>
+              <div>
+                <div style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: '700', color: 'var(--color-primary)' }}>Pesantren Yatim Al-Hanif</div>
+                <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Lembaga Pendidikan Islam</div>
+              </div>
+            </div>
+            <p style={{ fontSize: '14px', color: 'var(--color-on-surface-variant)', lineHeight: '1.7', marginBottom: '16px' }}>
+              Membentuk generasi qur'ani yang berakhlak mulia, berwawasan global, dan berprestasi tinggi.
+            </p>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--color-surface-container-lowest)', padding: '6px 14px', borderRadius: '999px', boxShadow: 'var(--shadow-card)' }}>
+              <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-tertiary)' }}>verified</span>
+              <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--color-primary)' }}>Terakreditasi B — BAN S/M & Kemenag RI</span>
+            </div>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h4 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '16px' }}>Program Unggulan</h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {["Tahfidz 30 Juz Al-Qur'an", 'Kajian Kitab Kuning Turats', 'Madrasah Diniyah Salafiyah', 'Bilingual (Arab & Inggris)', 'Sains & Riset Teknologi'].map(link => (
+                <li key={link}><a href="#" style={{ fontSize: '14px', color: 'var(--color-on-surface-variant)', textDecoration: 'none', transition: 'color 0.15s' }}
+                  onMouseEnter={e => e.currentTarget.style.color = 'var(--color-primary)'}
+                  onMouseLeave={e => e.currentTarget.style.color = 'var(--color-on-surface-variant)'}
+                >{link}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '16px' }}>Alamat & Kontak</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px', color: 'var(--color-on-surface-variant)' }}>
+              {[
+                { icon: 'location_on', text: 'Jl. Pesantren Luhur No. 45, Cisarua, Bogor, Jawa Barat 16750' },
+                { icon: 'chat',        text: 'WhatsApp PMB: +62 812-3456-7890' },
+                { icon: 'call',        text: 'Telp: (0251) 8251234' },
+                { icon: 'mail',        text: 'info@pesantren-alhanif.id' },
+              ].map((c, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }}>{c.icon}</span>
+                  <span>{c.text}</span>
+                </div>
+              ))}
+            </div>
+            {/* Social icons */}
+            <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+              {['play_circle', 'photo_camera', 'public', 'smart_display'].map((icon, i) => (
+                <a key={i} href="#" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--color-surface-container-lowest)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)', boxShadow: 'var(--shadow-card)', transition: 'all 0.15s', textDecoration: 'none' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'var(--color-primary)'; e.currentTarget.style.color = '#fff'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'var(--color-surface-container-lowest)'; e.currentTarget.style.color = 'var(--color-primary)'; }}
+                >
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>{icon}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer bottom */}
+        <div style={{
+          paddingTop: '24px',
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          justifyContent: 'space-between',
+          alignItems: isMobile ? 'flex-start' : 'center',
+          gap: '12px',
+          fontSize: '13px',
+          color: 'var(--color-on-surface-variant)',
+        }}>
+          <span>© 2025 Pondok Pesantren Yatim Al-Hanif. Dilindungi Undang-Undang.</span>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            {['Kebijakan Privasi', 'Syarat & Ketentuan', 'Brosur Digital'].map(link => (
+              <a key={link} href="#" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--color-on-surface)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--color-on-surface-variant)'}
+              >{link}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 /* ═══════════════════════════════════════════════════
    GallerySection — Mobile: 2-col | Desktop: 3-col
 ═══════════════════════════════════════════════════ */
@@ -1012,80 +1116,8 @@ export default function Beranda({ onNavigate }) {
         </section>
 
         {/* ── Footer ── */}
-        <footer className="beranda-section-pad" style={{ background: 'var(--color-surface-container-low)', padding: '0' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '4fr 3fr 5fr', paddingBottom: '48px', borderBottom: '1px solid var(--color-outline-variant)' }}>
-              {/* Brand */}
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-                  <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--color-primary-container)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <span className="material-symbols-outlined" style={{ color: 'var(--color-on-primary)', fontSize: '22px' }}>mosque</span>
-                  </div>
-                  <div>
-                    <div style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: '700', color: 'var(--color-primary)' }}>Pesantren Yatim Al-Hanif</div>
-                    <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Lembaga Pendidikan Islam</div>
-                  </div>
-                </div>
-                <p style={{ fontSize: '14px', color: 'var(--color-on-surface-variant)', lineHeight: '1.7', marginBottom: '16px' }}>
-                  Membentuk generasi qur'ani yang berakhlak mulia, berwawasan global, dan berprestasi tinggi.
-                </p>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--color-surface-container-lowest)', padding: '6px 14px', borderRadius: '999px', boxShadow: 'var(--shadow-card)' }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-tertiary)' }}>verified</span>
-                  <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--color-primary)' }}>Terakreditasi B</span>
-                </div>
-              </div>
-
-              {/* Links */}
-              <div>
-                <h4 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '16px' }}>Program Unggulan</h4>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  {["Tahfidz 30 Juz Al-Qur'an", 'Kajian Kitab Kuning Turats', 'Madrasah Diniyah Salafiyah', 'Bilingual (Arab & Inggris)', 'Sains & Riset Teknologi'].map(link => (
-                    <li key={link}><a href="#" style={{ fontSize: '14px', color: 'var(--color-on-surface-variant)', textDecoration: 'none', transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--color-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-on-surface-variant)'}>{link}</a></li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Contact */}
-              <div>
-                <h4 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '16px' }}>Alamat & Kontak</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px', color: 'var(--color-on-surface-variant)' }}>
-                  {[
-                    { icon: 'location_on', text: 'Jl. Pesantren Luhur No. 45, Cisarua, Bogor, Jawa Barat 16750' },
-                    { icon: 'chat', text: 'WhatsApp PMB: +62 812-3456-7890' },
-                    { icon: 'call', text: 'Telp: (0251) 8251234' },
-                    { icon: 'mail', text: 'info@pesantren-alhanif.id' },
-                  ].map((c, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: '20px', color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }}>{c.icon}</span>
-                      {c.text}
-                    </div>
-                  ))}
-                </div>
-                <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                  {['play_circle', 'photo_camera', 'public', 'smart_display'].map((icon, i) => (
-                    <a key={i} href="#" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--color-surface-container-lowest)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)', boxShadow: 'var(--shadow-card)', transition: 'all 0.15s', textDecoration: 'none' }}
-                      onMouseEnter={e => { e.currentTarget.style.background = 'var(--color-primary)'; e.currentTarget.style.color = '#fff'; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = 'var(--color-surface-container-lowest)'; e.currentTarget.style.color = 'var(--color-primary)'; }}
-                    >
-                      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>{icon}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Footer bottom */}
-            <div style={{ paddingTop: '32px', paddingBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '13px', color: 'var(--color-on-surface-variant)' }}>
-              <span>© 2025 Pondok Pesantren Yatim Al-Hanif. Dilindungi Undang-Undang.</span>
-              <div style={{ display: 'flex', gap: '24px' }}>
-                {['Kebijakan Privasi', 'Syarat & Ketentuan', 'Brosur Digital'].map(link => (
-                  <a key={link} href="#" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--color-on-surface)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-on-surface-variant)'}>{link}</a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </footer>
-      </main>
+        <BerandaFooter isMobile={isMobile} />
+            </main>
 
       {/* Pulse animation */}
       <style>{`
