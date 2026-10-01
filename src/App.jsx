@@ -10,6 +10,7 @@ import Placeholder from './pages/Placeholder';
 import PortalWali from './pages/PortalWali';
 import ManajemenAkun from './pages/ManajemenAkun';
 import AdminPanel from './pages/AdminPanel';
+import StrukturOrganisasi from './pages/StrukturOrganisasi';
 
 // Pages that show inside the admin shell (sidebar + header)
 const ADMIN_PAGES = {
@@ -90,6 +91,10 @@ export default function App() {
 
   if (activePage === 'pendaftaran') {
     return <Pendaftaran onNavigate={handleNavigate} />;
+  }
+
+  if (activePage === 'struktur-organisasi') {
+    return <StrukturOrganisasi onNavigate={handleNavigate} />;
   }
 
   if (activePage === 'login') {

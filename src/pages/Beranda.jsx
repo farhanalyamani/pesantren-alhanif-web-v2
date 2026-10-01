@@ -830,18 +830,30 @@ export default function Beranda({ onNavigate }) {
             </div>
 
             <nav className="beranda-nav-links">
-              {['Beranda', 'Profil', 'Pendidikan', 'Pendaftaran', 'Galeri', 'Berita'].map((item) => (
+              {[
+                { label: 'Beranda', page: 'beranda' },
+                { label: 'Profil', page: 'struktur-organisasi' },
+                { label: 'Pendidikan', page: null },
+                { label: 'Pendaftaran', page: 'pendaftaran' },
+                { label: 'Galeri', page: null },
+                { label: 'Berita', page: null },
+              ].map(({ label, page }) => (
                 <a
-                  key={item}
+                  key={label}
                   href="#"
+                  onClick={e => { e.preventDefault(); if (page) onNavigate(page); }}
                   style={{
-                    fontSize: '14px', fontWeight: item === 'Beranda' ? '700' : '500',
-                    color: item === 'Beranda' ? 'var(--color-primary)' : 'var(--color-on-surface-variant)',
+                    fontSize: '14px', fontWeight: label === 'Beranda' ? '700' : '500',
+                    color: label === 'Beranda' ? 'var(--color-primary)' : 'var(--color-on-surface-variant)',
                     transition: 'color 0.15s',
                     textDecoration: 'none',
+                    opacity: page ? 1 : 0.6,
+                    cursor: page ? 'pointer' : 'default',
                   }}
+                  onMouseEnter={e => { if (page) e.currentTarget.style.color = 'var(--color-primary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = label === 'Beranda' ? 'var(--color-primary)' : 'var(--color-on-surface-variant)'; }}
                 >
-                  {item}
+                  {label}
                 </a>
               ))}
             </nav>
@@ -902,16 +914,23 @@ export default function Beranda({ onNavigate }) {
             display: 'flex', flexDirection: 'column', gap: 4,
             boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
           }}>
-            {['Beranda', 'Profil', 'Pendidikan', 'Galeri', 'Berita'].map(item => (
-              <a key={item} href="#" onClick={() => setMobileMenuOpen(false)}
+            {[
+              { label: 'Beranda', page: 'beranda' },
+              { label: 'Profil & Struktur', page: 'struktur-organisasi' },
+              { label: 'Pendidikan', page: null },
+              { label: 'Galeri', page: null },
+              { label: 'Berita', page: null },
+            ].map(({ label, page }) => (
+              <a key={label} href="#" onClick={e => { e.preventDefault(); setMobileMenuOpen(false); if (page) onNavigate(page); }}
                 style={{
                   padding: '11px 14px', borderRadius: 10, fontSize: 14,
-                  fontWeight: item === 'Beranda' ? 700 : 500,
-                  color: item === 'Beranda' ? 'var(--color-primary)' : 'var(--color-on-surface)',
+                  fontWeight: label === 'Beranda' ? 700 : 500,
+                  color: label === 'Beranda' ? 'var(--color-primary)' : 'var(--color-on-surface)',
                   textDecoration: 'none',
-                  background: item === 'Beranda' ? 'var(--color-secondary-container)' : 'transparent',
+                  background: label === 'Beranda' ? 'var(--color-secondary-container)' : 'transparent',
+                  opacity: page ? 1 : 0.55,
                 }}>
-                {item}
+                {label}
               </a>
             ))}
             <div style={{ borderTop: '1px solid var(--color-outline-variant)', marginTop: 8, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 8 }}>
