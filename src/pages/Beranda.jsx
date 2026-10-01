@@ -805,15 +805,16 @@ export default function Beranda({ onNavigate }) {
         {/* Main nav */}
         <div style={{ background: 'rgba(249,249,255,0.96)', backdropFilter: 'blur(16px)' }}>
           <div className="beranda-nav-inner">
-            <div className="beranda-nav-actions">
+            {/* Logo + Brand — selalu tampil */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
               <img
                 src={logoAlhanif}
                 alt="Logo Al-Hanif"
-                style={{ width: '44px', height: '44px', borderRadius: '10px', objectFit: 'cover', border: '1px solid var(--color-secondary-container)' }}
+                style={{ width: isMobile ? '36px' : '44px', height: isMobile ? '36px' : '44px', borderRadius: '10px', objectFit: 'cover', border: '1px solid var(--color-secondary-container)' }}
               />
               <div>
-                <div style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.1 }}>Al-Hanif</div>
-                <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Pondok Pesantren Yatim</div>
+                <div style={{ fontFamily: 'var(--font-serif)', fontSize: isMobile ? '17px' : '22px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.1 }}>Al-Hanif</div>
+                {!isMobile && <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Pondok Pesantren Yatim</div>}
               </div>
             </div>
 
@@ -834,35 +835,47 @@ export default function Beranda({ onNavigate }) {
               ))}
             </nav>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '6px' : '12px', flexShrink: 0 }}>
               <a
                 href="#"
                 style={{
-                  display: 'inline-flex', alignItems: 'center', padding: '10px 20px',
-                  borderRadius: '12px', background: 'var(--color-primary)', color: 'var(--color-on-primary)',
-                  fontWeight: '600', fontSize: '14px', textDecoration: 'none',
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  padding: isMobile ? '7px 12px' : '10px 20px',
+                  borderRadius: '10px', background: 'var(--color-primary)', color: 'var(--color-on-primary)',
+                  fontWeight: '600', fontSize: isMobile ? '12px' : '14px', textDecoration: 'none',
                   boxShadow: '0 4px 20px -2px rgba(20,90,50,0.2)',
-                  transition: 'background 0.15s',
+                  transition: 'background 0.15s', whiteSpace: 'nowrap',
                 }}
                 onClick={() => onNavigate('pendaftaran')}
               >
-                Pendaftaran Santri Baru
+                {isMobile ? 'Daftar' : 'Pendaftaran Santri Baru'}
               </a>
               <button
                 onClick={() => onNavigate('login')}
                 style={{
-                  display: 'flex', alignItems: 'center', gap: '6px',
-                  padding: '10px 16px', borderRadius: '12px',
+                  display: 'flex', alignItems: 'center', gap: isMobile ? '0' : '6px',
+                  padding: isMobile ? '7px 10px' : '10px 16px', borderRadius: '10px',
                   background: 'var(--color-surface-container)',
                   color: 'var(--color-on-surface)',
                   border: '1.5px solid var(--color-outline-variant)',
-                  cursor: 'pointer', fontWeight: '600', fontSize: '14px',
+                  cursor: 'pointer', fontWeight: '600', fontSize: isMobile ? '12px' : '14px',
                   transition: 'all 0.15s',
                 }}
                 title="Masuk Portal"
               >
                 <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>login</span>
-                Masuk Portal
+                {!isMobile && 'Masuk Portal'}
+              </button>
+
+              {/* Hamburger — mobile only */}
+              <button
+                onClick={() => setMobileMenuOpen(m => !m)}
+                style={{ display: isMobile ? 'flex' : 'none', background: 'none', border: '1.5px solid var(--color-outline-variant)', borderRadius: 8, padding: '6px 8px', cursor: 'pointer', alignItems: 'center' }}
+                aria-label="Buka menu"
+              >
+                <span className="material-symbols-outlined" style={{ fontSize: 20, color: 'var(--color-primary)' }}>
+                  {mobileMenuOpen ? 'close' : 'menu'}
+                </span>
               </button>
             </div>
 
