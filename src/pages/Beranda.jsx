@@ -136,6 +136,13 @@ function getPrayerTimes() {
 function HeroSlider() {
   const [current, setCurrent] = useState(0);
   const timerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
 
   const go = (idx) => setCurrent(((idx % SLIDES.length) + SLIDES.length) % SLIDES.length);
 
@@ -203,18 +210,22 @@ function HeroSlider() {
 
           {/* Caption card */}
           <div style={{
-            position: 'absolute', bottom: '48px', left: '20px', right: '20px',
-            padding: '16px', borderRadius: '16px',
+            position: 'absolute',
+            bottom: isMobile ? '28px' : '48px',
+            left: isMobile ? '12px' : '20px',
+            right: isMobile ? '12px' : '20px',
+            padding: isMobile ? '10px 12px' : '16px',
+            borderRadius: isMobile ? '12px' : '16px',
             background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)',
             boxShadow: '0 8px 24px rgba(0,0,0,0.12)', border: '1px solid rgba(255,255,255,0.4)',
-            display: 'flex', alignItems: 'center', gap: '12px',
+            display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '12px',
           }}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: slide.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <span className="material-symbols-outlined" style={{ fontSize: '26px', color: '#fff' }}>{slide.icon}</span>
+            <div style={{ width: isMobile ? '34px' : '48px', height: isMobile ? '34px' : '48px', borderRadius: '10px', background: slide.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <span className="material-symbols-outlined" style={{ fontSize: isMobile ? '18px' : '26px', color: '#fff' }}>{slide.icon}</span>
             </div>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: '700', color: 'var(--color-primary)' }}>{slide.title}</div>
-              <div style={{ fontSize: '13px', color: 'var(--color-on-surface-variant)' }}>{slide.sub}</div>
+              <div style={{ fontSize: isMobile ? '12px' : '15px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.3 }}>{slide.title}</div>
+              <div style={{ fontSize: isMobile ? '11px' : '13px', color: 'var(--color-on-surface-variant)', lineHeight: 1.3 }}>{slide.sub}</div>
             </div>
           </div>
 
