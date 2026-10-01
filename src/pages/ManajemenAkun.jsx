@@ -157,7 +157,7 @@ export default function ManajemenAkun() {
   };
 
   return (
-    <div style={{ padding: 'var(--space-lg)', display: 'flex', flexDirection: 'column', gap: '24px', fontFamily: "'Plus Jakarta Sans','Inter',sans-serif" }}>
+    <div style={{ padding: 'clamp(12px,3vw,var(--space-lg))', display: 'flex', flexDirection: 'column', gap: '24px', fontFamily: "'Plus Jakarta Sans','Inter',sans-serif" }}>
 
       {/* Toast */}
       {toast && (
@@ -202,7 +202,7 @@ export default function ManajemenAkun() {
       </div>
 
       {/* Stats cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(140px,1fr))', gap: '16px' }}>
         {[
           { label: 'Total Akun', value: accounts.length, icon: 'group', bg: 'rgba(173,242,189,0.3)', color: '#004120' },
           { label: 'Akun Aktif', value: accounts.filter(a => a.status === 'aktif').length, icon: 'verified_user', bg: 'rgba(160,243,153,0.25)', color: '#1b6d24' },

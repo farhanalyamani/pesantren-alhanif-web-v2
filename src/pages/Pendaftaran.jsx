@@ -184,7 +184,7 @@ function UploadZone({ label, hint, id }) {
 function Step1({ data, onChange }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '16px' }}>
         <Field label="Nama Lengkap Calon Santri" required>
           <Input id="nama-lengkap" placeholder="Sesuai Akte Kelahiran"
             value={data.namaLengkap} onChange={e => onChange('namaLengkap', e.target.value)} />
@@ -195,7 +195,7 @@ function Step1({ data, onChange }) {
         </Field>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))', gap: '16px' }}>
         <Field label="Jenis Kelamin" required>
           <Select id="jenis-kelamin" value={data.jenisKelamin} onChange={e => onChange('jenisKelamin', e.target.value)}>
             <option value="">— Pilih —</option>
@@ -213,7 +213,7 @@ function Step1({ data, onChange }) {
         </Field>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '16px' }}>
         <Field label="NISN (Nomor Induk Siswa Nasional)" hint="Kosongkan jika belum memiliki">
           <Input id="nisn" placeholder="10 digit angka" maxLength={10}
             value={data.nisn} onChange={e => onChange('nisn', e.target.value)} />
@@ -224,7 +224,7 @@ function Step1({ data, onChange }) {
         </Field>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '16px' }}>
         <Field label="Asal Sekolah Terakhir" required>
           <Input id="asal-sekolah" placeholder="Nama SD/MI/SMP/MTs asal"
             value={data.asalSekolah} onChange={e => onChange('asalSekolah', e.target.value)} />
@@ -237,7 +237,7 @@ function Step1({ data, onChange }) {
         </Field>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '16px' }}>
         <Field label="Jenjang yang Dituju" required>
           <Select id="jenjang" value={data.jenjang} onChange={e => onChange('jenjang', e.target.value)}>
             {JENJANG_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -257,7 +257,7 @@ function Step1({ data, onChange }) {
           <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>menu_book</span>
           Capaian Hafalan Al-Qur'an (opsional, nilai plus seleksi)
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '16px' }}>
           <Field label="Jumlah Juz Hafalan">
             <Select id="juz-hafalan" value={data.juzHafalan} onChange={e => onChange('juzHafalan', e.target.value)}>
               <option value="0">Belum hafal</option>
@@ -295,7 +295,7 @@ function Step1({ data, onChange }) {
         <Textarea id="alamat" placeholder="Jl., RT/RW, Kelurahan/Desa, Kecamatan, Kab/Kota"
           value={data.alamat} onChange={e => onChange('alamat', e.target.value)} />
       </Field>
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '16px' }}>
         <Field label="Provinsi" required>
           <Select id="provinsi" value={data.provinsi} onChange={e => onChange('provinsi', e.target.value)}>
             {PROVINSI_OPTIONS.map(p => <option key={p} value={p}>{p || '— Pilih Provinsi —'}</option>)}
@@ -320,7 +320,7 @@ function Step2({ data, onChange }) {
           Data Ayah Kandung
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '14px' }}>
             <Field label="Nama Lengkap Ayah" required>
               <Input id="nama-ayah" placeholder="Nama sesuai KTP"
                 value={data.namaAyah} onChange={e => onChange('namaAyah', e.target.value)} />
@@ -330,7 +330,7 @@ function Step2({ data, onChange }) {
                 value={data.pekerjaanAyah} onChange={e => onChange('pekerjaanAyah', e.target.value)} />
             </Field>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: '14px' }}>
             <Field label="Status Ayah" required>
               <Select id="status-ayah" value={data.statusAyah} onChange={e => onChange('statusAyah', e.target.value)}>
                 <option value="">— Pilih —</option>
@@ -363,7 +363,7 @@ function Step2({ data, onChange }) {
           Data Ibu Kandung
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '14px' }}>
             <Field label="Nama Lengkap Ibu" required>
               <Input id="nama-ibu" placeholder="Nama sesuai KTP"
                 value={data.namaIbu} onChange={e => onChange('namaIbu', e.target.value)} />
@@ -373,7 +373,7 @@ function Step2({ data, onChange }) {
                 value={data.pekerjaanIbu} onChange={e => onChange('pekerjaanIbu', e.target.value)} />
             </Field>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '14px' }}>
             <Field label="Status Ibu" required>
               <Select id="status-ibu" value={data.statusIbu} onChange={e => onChange('statusIbu', e.target.value)}>
                 <option value="">— Pilih —</option>
@@ -397,7 +397,7 @@ function Step2({ data, onChange }) {
           <span style={{ fontSize: '11px', fontWeight: '400', color: 'var(--color-on-surface-variant)', marginLeft: 'auto' }}>Opsional</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: '14px' }}>
             <Field label="Nama Lengkap Wali">
               <Input id="nama-wali" placeholder="Nama wali/pengasuh"
                 value={data.namaWali} onChange={e => onChange('namaWali', e.target.value)} />
@@ -429,7 +429,7 @@ function Step2({ data, onChange }) {
           <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>contact_phone</span>
           Kontak Darurat
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '14px' }}>
           <Field label="Nama Kontak Darurat" required>
             <Input id="kontak-darurat-nama" placeholder="Yang bisa dihubungi 24 jam"
               value={data.kontakDaruratNama} onChange={e => onChange('kontakDaruratNama', e.target.value)} />
@@ -454,7 +454,7 @@ function Step3() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: '16px' }}>
         <Field label="Akte Kelahiran" required>
           <UploadZone id="upload-akte" label="Upload Akte Kelahiran" />
         </Field>
@@ -710,7 +710,7 @@ export default function Pendaftaran({ onNavigate }) {
 
       {/* ── Compact Navbar ── */}
       <header style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(249,249,255,0.96)', backdropFilter: 'blur(16px)', boxShadow: '0 1px 8px rgba(0,0,0,0.06)', borderBottom: '1px solid var(--color-outline-variant)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <button
             onClick={() => onNavigate('beranda')}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
@@ -738,7 +738,7 @@ export default function Pendaftaran({ onNavigate }) {
       </header>
 
       {/* ── Hero Banner ── */}
-      <div style={{ background: 'linear-gradient(135deg, var(--color-primary) 0%, #1a5c3a 100%)', padding: '40px 48px', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ background: 'linear-gradient(135deg, var(--color-primary) 0%, #1a5c3a 100%)', padding: '28px 16px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', right: '-80px', top: '-80px', width: '300px', height: '300px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', left: '40%', bottom: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(212,175,55,0.08)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', position: 'relative', zIndex: 1 }}>
@@ -769,7 +769,7 @@ export default function Pendaftaran({ onNavigate }) {
       </div>
 
       {/* ── Step Indicator ── */}
-      <div style={{ background: 'var(--color-surface-container-lowest)', borderBottom: '1px solid var(--color-outline-variant)', padding: '0 48px' }}>
+      <div style={{ background: 'var(--color-surface-container-lowest)', borderBottom: '1px solid var(--color-outline-variant)', padding: '0 8px' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {STEPS.map((s, i) => (
@@ -798,10 +798,10 @@ export default function Pendaftaran({ onNavigate }) {
                     }
                   </div>
                   <div style={{ textAlign: 'left' }}>
-                    <div style={{ fontSize: '10px', color: 'var(--color-on-surface-variant)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    <div style={{ fontSize: '10px', color: 'var(--color-on-surface-variant)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'none' }}>
                       Langkah {s.id}
                     </div>
-                    <div style={{ fontSize: '13px', fontWeight: s.id === step ? '700' : '500', color: s.id === step ? 'var(--color-primary)' : 'var(--color-on-surface-variant)' }}>
+                    <div style={{ fontSize: '11px', fontWeight: s.id === step ? '700' : '500', color: s.id === step ? 'var(--color-primary)' : 'var(--color-on-surface-variant)', whiteSpace: 'nowrap' }}>
                       {s.label}
                     </div>
                   </div>
@@ -816,7 +816,7 @@ export default function Pendaftaran({ onNavigate }) {
       </div>
 
       {/* ── Main Layout ── */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '32px 48px 64px', display: 'grid', gridTemplateColumns: '1fr 320px', gap: '32px', alignItems: 'start' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: 'clamp(16px,3vw,32px) clamp(12px,3vw,48px) 64px', display: 'grid', gridTemplateColumns: 'minmax(0,1fr)', gap: '24px', alignItems: 'start' }}>
 
         {/* ── Form Card ── */}
         <div style={{ background: 'var(--color-surface-container-lowest)', borderRadius: '20px', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', border: '1px solid var(--color-outline-variant)', overflow: 'hidden' }}>
@@ -839,7 +839,7 @@ export default function Pendaftaran({ onNavigate }) {
           </div>
 
           {/* Form body */}
-          <div style={{ padding: '28px' }}>
+          <div style={{ padding: 'clamp(16px,4vw,28px)' }}>
             {step === 1 && <Step1 data={step1} onChange={updateStep1} />}
             {step === 2 && <Step2 data={step2} onChange={updateStep2} />}
             {step === 3 && <Step3 />}

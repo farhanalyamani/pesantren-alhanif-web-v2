@@ -262,6 +262,7 @@ function HeroSlider() {
 
 export default function Beranda({ onNavigate }) {
   const [activeFilter, setActiveFilter] = useState('Semua');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div style={{ width: '100%', background: 'var(--color-surface)' }}>

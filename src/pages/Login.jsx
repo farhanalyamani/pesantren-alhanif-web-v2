@@ -99,22 +99,12 @@ export default function Login({ onNavigate, onLoginSuccess }) {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh', width: '100%',
-      display: 'grid', gridTemplateColumns: '420px 1fr',
-      fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
-      background: '#F1F5F9',
-    }}>
+    <div className="login-page-grid" style={{ minHeight: '100vh', width: '100%', display: 'grid', gridTemplateColumns: '420px 1fr', fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif", background: '#F1F5F9' }}>
 
       {/* ══════════════════════════════════
           LEFT PANEL — dark green
       ══════════════════════════════════ */}
-      <div style={{
-        background: 'linear-gradient(160deg, #0d3320 0%, #145A32 60%, #1a5c3a 100%)',
-        padding: '40px 36px',
-        display: 'flex', flexDirection: 'column', gap: '0',
-        position: 'relative', overflow: 'hidden',
-      }}>
+      <div className="login-left-panel" style={{ background: 'linear-gradient(160deg, #0d3320 0%, #145A32 60%, #1a5c3a 100%)', padding: '40px 36px', display: 'flex', flexDirection: 'column', gap: '0', position: 'relative', overflow: 'hidden' }}>
         {/* Decorative circles */}
         <div style={{ position: 'absolute', top: '-60px', right: '-60px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(212,175,55,0.06)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', bottom: '120px', left: '-40px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.03)', pointerEvents: 'none' }} />
@@ -208,7 +198,7 @@ export default function Login({ onNavigate, onLoginSuccess }) {
               <div style={{ fontSize: '11px', fontWeight: '700', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '10px' }}>
                 Pilih Hak Akses Masuk
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+              <div className="login-role-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
                 {[
                   { id: 'wali',  label: 'Wali Santri',    icon: 'family_restroom' },
                   { id: 'staf',  label: 'Asatidz / Staf', icon: 'badge' },

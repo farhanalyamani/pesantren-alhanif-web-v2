@@ -154,10 +154,10 @@ export default function AdminPanel({ onNavigate }) {
       </aside>
 
       {/* ── MAIN CONTENT ── */}
-      <div style={{ flex:1, marginLeft:260, display:'flex', flexDirection:'column' }}>
+      <div className="admin-panel-main" style={{ flex:1, marginLeft:260, display:'flex', flexDirection:'column' }}>
 
         {/* Top header */}
-        <header style={{ background:'rgba(255,255,255,0.95)', borderBottom:'1px solid #DEE8FF', padding:'0 36px', height:64, display:'flex', alignItems:'center', justifyContent:'space-between', position:'sticky', top:0, zIndex:30 }}>
+        <header style={{ background:'rgba(255,255,255,0.95)', borderBottom:'1px solid #DEE8FF', padding:'0 clamp(12px,3vw,36px)', height:64, display:'flex', alignItems:'center', justifyContent:'space-between', position:'sticky', top:0, zIndex:30 }}>
           <div>
             <h1 style={{ fontSize:20, fontWeight:800, color:'#145A32', margin:0 }}>Manajemen Akun Asatidz & Staf</h1>
             <p style={{ fontSize:12, color:'#64748B', margin:0 }}>Kelola akun login portal internal pesantren</p>
@@ -172,10 +172,10 @@ export default function AdminPanel({ onNavigate }) {
           </button>
         </header>
 
-        <main style={{ padding:'32px 36px', flex:1 }}>
+        <main style={{ padding:'clamp(16px,3vw,32px) clamp(12px,3vw,36px)', flex:1 }}>
 
           {/* Stats */}
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16, marginBottom:28 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))', gap:16, marginBottom:28 }}>
             {[
               { label:'Total Akun',     value:accounts.length,                               icon:'group',          bg:'rgba(173,242,189,0.3)', color:'#004120' },
               { label:'Akun Aktif',     value:accounts.filter(a=>a.status==='aktif').length,  icon:'verified_user',  bg:'rgba(160,243,153,0.25)', color:'#1b6d24' },
@@ -195,7 +195,7 @@ export default function AdminPanel({ onNavigate }) {
           </div>
 
           {/* Table card */}
-          <div style={{ background:'#fff', borderRadius:20, border:'1px solid #DEE8FF', overflow:'hidden' }}>
+          <div style={{ background:'#fff', borderRadius:20, border:'1px solid #DEE8FF', overflow:'hidden', overflowX:'auto' }}>
             {/* Toolbar */}
             <div style={{ padding:'16px 24px', borderBottom:'1px solid #F0F3FF', display:'flex', alignItems:'center', justifyContent:'space-between', gap:12 }}>
               <div style={{ position:'relative', flex:1, maxWidth:360 }}>
