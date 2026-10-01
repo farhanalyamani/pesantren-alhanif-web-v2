@@ -256,6 +256,204 @@ function HeroSlider() {
   );
 }
 
+
+/* ═══════════════════════════════════════════════════
+   ProgramSection — Mobile-aware swipe slider
+═══════════════════════════════════════════════════ */
+const PROGRAM_CARDS = [
+  {
+    icon: 'menu_book',
+    iconBg: 'var(--color-primary-container)',
+    iconColor: 'var(--color-tertiary-fixed)',
+    badge: 'Sanad Muttashil Rasmi',
+    badgeBg: 'var(--color-secondary-container)',
+    badgeColor: 'var(--color-on-secondary-container)',
+    title: "Tahfidzul Qur'an & Qira'ati",
+    desc: "Bimbingan tahfidz intensif bersanad muttashil dengan target hafalan 30 Juz mutqin, talaqqi makharijul huruf, serta pemahaman tafsir amali.",
+    features: ["Metode Ziyadah & Muraja'ah terukur harian", "Halaqah Tahfidz Eksklusif (1 Ustadz : 10 Santri)", "Wisuda Khotmil Qur'an Akbar Tahunan"],
+    linkText: 'Pelajari Program Tahfidz',
+    featured: false,
+  },
+  {
+    icon: 'school',
+    iconBg: 'var(--color-surface-container-lowest)',
+    iconColor: 'var(--color-primary)',
+    badge: 'MTs & MA Terakreditasi B',
+    badgeBg: 'var(--color-tertiary-fixed)',
+    badgeColor: 'var(--color-on-tertiary-container)',
+    title: 'Madrasah Diniyah & Salafiyah',
+    desc: "Pendidikan formal berjenjang MTs & MA yang terintegrasi dengan penguatan akidah akhlak, syariah, kurikulum nasional, dan kurikulum Cambridge.",
+    features: ['Bilingual Harian Aktif (Bahasa Arab & Inggris)', 'Laboratorium Sains & Multimedia Komputer', 'Ekstrakurikuler Riset Ilmiah & Robotika Santri'],
+    linkText: 'Pelajari Madrasah Formal',
+    featured: true,
+  },
+  {
+    icon: 'history_edu',
+    iconBg: 'var(--color-surface-container-high)',
+    iconColor: 'var(--color-tertiary)',
+    badge: 'Khasanah Intelektual Islam',
+    badgeBg: 'var(--color-surface-container)',
+    badgeColor: 'var(--color-primary)',
+    title: 'Kajian Kitab Kuning (Turats)',
+    desc: "Penempaan literasi keilmuan Islam mendalam dengan mengkaji kitab-kitab muktabar karya ulama salafus shalih dalam nahwu, fiqh Syafi'i, hadits, & tasawuf.",
+    features: ["Metode Bandongan & Sorogan Tradisional Matang", "Ijazah Sanad Keilmuan Bersambung ke Mu'allif", "Bahtsul Masail & Diskusi Fiqhiyah Santri Rutin"],
+    linkText: 'Pelajari Kajian Turats',
+    featured: false,
+  },
+];
+
+function ProgramSection() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Track scroll to update active dot
+  const handleScroll = () => {
+    if (!trackRef.current) return;
+    const el = trackRef.current;
+    const idx = Math.round(el.scrollLeft / el.clientWidth);
+    setActiveIdx(Math.min(idx, PROGRAM_CARDS.length - 1));
+  };
+
+  const scrollTo = (idx) => {
+    if (!trackRef.current) return;
+    trackRef.current.scrollTo({ left: idx * trackRef.current.clientWidth, behavior: 'smooth' });
+    setActiveIdx(idx);
+  };
+
+  return (
+    <section style={{ background: 'var(--color-surface)', padding: isMobile ? '40px 0' : '80px 48px', overflow: 'hidden' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: isMobile ? '28px' : '48px', padding: isMobile ? '0 20px' : '0' }}>
+          <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>Kurikulum Komprehensif Terpadu</div>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: isMobile ? '26px' : '36px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '16px', lineHeight: 1.2 }}>Program Pendidikan Berkelanjutan</h2>
+          <p style={{ fontSize: isMobile ? '14px' : '17px', color: 'var(--color-on-surface-variant)', maxWidth: '600px', margin: '0 auto', lineHeight: '1.7' }}>
+            Mengintegrasikan kedalaman keilmuan Islam klasik (Turats), hafalan kalamullah, dan keunggulan sains terapan abad ke-21.
+          </p>
+        </div>
+
+        {/* Cards — Mobile: horizontal swipe | Desktop: 3-col grid */}
+        {isMobile ? (
+          <div>
+            <div
+              ref={trackRef}
+              onScroll={handleScroll}
+              style={{
+                display: 'flex',
+                overflowX: 'auto',
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'none',
+                gap: '16px',
+                padding: '8px 20px 16px',
+              }}
+            >
+              {PROGRAM_CARDS.map((card, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    minWidth: 'calc(85vw)',
+                    maxWidth: 'calc(85vw)',
+                    scrollSnapAlign: 'start',
+                    flexShrink: 0,
+                    padding: '24px',
+                    borderRadius: '20px',
+                    background: card.featured ? 'var(--color-primary)' : 'var(--color-surface-container-lowest)',
+                    boxShadow: card.featured ? '0 12px 32px -8px rgba(0,65,32,0.4)' : 'var(--shadow-card)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <div style={{ width: '52px', height: '52px', borderRadius: '14px', background: card.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '26px', color: card.iconColor }}>{card.icon}</span>
+                  </div>
+                  <div style={{ display: 'inline-block', padding: '3px 10px', borderRadius: '999px', background: card.badgeBg, color: card.badgeColor, fontSize: '11px', fontWeight: '600', marginBottom: '10px', alignSelf: 'flex-start' }}>{card.badge}</div>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '20px', fontWeight: '700', color: card.featured ? '#fff' : 'var(--color-primary)', marginBottom: '10px', lineHeight: 1.3 }}>{card.title}</h3>
+                  <p style={{ fontSize: '13px', color: card.featured ? 'rgba(255,255,255,0.8)' : 'var(--color-on-surface-variant)', lineHeight: '1.6', marginBottom: '14px', flex: 1 }}>{card.desc}</p>
+                  {card.features.map((t, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '6px' }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '16px', color: card.featured ? 'var(--color-tertiary-fixed)' : 'var(--color-secondary)', flexShrink: 0, marginTop: '1px' }}>check_circle</span>
+                      <span style={{ fontSize: '12px', color: card.featured ? 'rgba(255,255,255,0.85)' : 'var(--color-on-surface)' }}>{t}</span>
+                    </div>
+                  ))}
+                  <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '700', color: card.featured ? 'var(--color-tertiary-fixed)' : 'var(--color-primary)', textDecoration: 'none', fontSize: '13px', marginTop: '16px' }}>
+                    {card.linkText} <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>arrow_forward</span>
+                  </a>
+                </div>
+              ))}
+            </div>
+
+            {/* Dots */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '16px' }}>
+              {PROGRAM_CARDS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollTo(i)}
+                  style={{
+                    width: i === activeIdx ? '24px' : '8px', height: '8px',
+                    borderRadius: '999px', border: 'none', cursor: 'pointer',
+                    background: i === activeIdx ? 'var(--color-primary)' : 'var(--color-outline-variant)',
+                    transition: 'all 0.3s ease', padding: 0,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
+            {PROGRAM_CARDS.map((card, idx) => (
+              <div
+                key={idx}
+                style={{
+                  padding: '32px', borderRadius: '24px',
+                  background: card.featured ? 'var(--color-primary)' : 'var(--color-surface-container-lowest)',
+                  boxShadow: card.featured ? '0 16px 40px -8px rgba(0,65,32,0.4)' : 'var(--shadow-card)',
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                  position: 'relative', overflow: 'hidden', transition: 'all 0.3s',
+                }}
+              >
+                {card.featured && <div style={{ position: 'absolute', right: '-32px', top: '-32px', width: '128px', height: '128px', borderRadius: '50%', background: 'rgba(27,109,36,0.3)', pointerEvents: 'none' }} />}
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                  <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: card.iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '32px', color: card.iconColor }}>{card.icon}</span>
+                  </div>
+                  <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: card.badgeBg, color: card.badgeColor, fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>{card.badge}</div>
+                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: '700', color: card.featured ? '#fff' : 'var(--color-primary)', marginBottom: '12px' }}>{card.title}</h3>
+                  <p style={{ fontSize: '14px', color: card.featured ? 'var(--color-on-primary-container)' : 'var(--color-on-surface-variant)', lineHeight: '1.7', marginBottom: '16px' }}>{card.desc}</p>
+                  {card.features.map((t, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '18px', color: card.featured ? 'var(--color-tertiary-fixed)' : 'var(--color-secondary)', flexShrink: 0, marginTop: '2px' }}>check_circle</span>
+                      <span style={{ fontSize: '13px', color: card.featured ? 'rgba(255,255,255,0.9)' : 'var(--color-on-surface)' }}>{t}</span>
+                    </div>
+                  ))}
+                </div>
+                <a href="#" style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '8px',
+                  padding: card.featured ? '12px 20px' : '0',
+                  borderRadius: card.featured ? '12px' : '0',
+                  background: card.featured ? 'var(--color-secondary-container)' : 'none',
+                  color: card.featured ? 'var(--color-on-secondary-container)' : 'var(--color-primary)',
+                  fontWeight: '700', fontSize: '14px', textDecoration: 'none',
+                  marginTop: '24px', alignSelf: 'flex-start', zIndex: 1, position: 'relative',
+                }}>
+                  {card.linkText} <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 /* ══════════════════════════════════════════════════════
    Main Beranda Page
 ══════════════════════════════════════════════════════ */
@@ -570,100 +768,11 @@ export default function Beranda({ onNavigate }) {
           </div>
         </section>
 
+
         {/* ── Program Cards ── */}
-        <section style={{ background: 'var(--color-surface)', padding: '80px 48px' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-              <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>Kurikulum Komprehensif Terpadu</div>
-              <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '36px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '16px' }}>Program Pendidikan Berkelanjutan</h2>
-              <p style={{ fontSize: '17px', color: 'var(--color-on-surface-variant)', maxWidth: '600px', margin: '0 auto', lineHeight: '1.7' }}>
-                Mengintegrasikan kedalaman keilmuan Islam klasik (Turats), hafalan kalamullah, dan keunggulan sains terapan abad ke-21.
-              </p>
-            </div>
+        <ProgramSection />
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
-              {/* Card 1 */}
-              <div style={{ padding: '32px', borderRadius: '24px', background: 'var(--color-surface-container-lowest)', boxShadow: 'var(--shadow-card)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s' }}>
-                <div>
-                  <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'var(--color-primary-container)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--color-tertiary-fixed)' }}>menu_book</span>
-                  </div>
-                  <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: 'var(--color-secondary-container)', color: 'var(--color-on-secondary-container)', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>Sanad Muttashil Rasmi</div>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '12px' }}>Tahfidzul Qur'an & Qira'ati</h3>
-                  <p style={{ fontSize: '14px', color: 'var(--color-on-surface-variant)', lineHeight: '1.7', marginBottom: '16px' }}>
-                    Bimbingan tahfidz intensif bersanad muttashil dengan target hafalan 30 Juz mutqin, talaqqi makharijul huruf, serta pemahaman tafsir amali.
-                  </p>
-                  {["Metode Ziyadah & Muraja'ah terukur harian", "Halaqah Tahfidz Eksklusif (1 Ustadz : 10 Santri)", "Wisuda Khotmil Qur'an Akbar Tahunan"].map((t, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-secondary)', flexShrink: 0, marginTop: '2px' }}>check_circle</span>
-                      <span style={{ fontSize: '13px', color: 'var(--color-on-surface)' }}>{t}</span>
-                    </div>
-                  ))}
-                </div>
-                <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontWeight: '700', color: 'var(--color-primary)', textDecoration: 'none', fontSize: '14px', marginTop: '24px' }}>
-                  Pelajari Program Tahfidz <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-                </a>
-              </div>
-
-              {/* Card 2 — featured */}
-              <div style={{ padding: '32px', borderRadius: '24px', background: 'var(--color-primary)', color: 'var(--color-on-primary)', boxShadow: '0 16px 40px -8px rgba(0,65,32,0.4)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', right: '-32px', top: '-32px', width: '128px', height: '128px', borderRadius: '50%', background: 'rgba(27,109,36,0.3)', pointerEvents: 'none' }} />
-                <div style={{ position: 'relative', zIndex: 1 }}>
-                  <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'var(--color-surface-container-lowest)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--color-primary)' }}>school</span>
-                  </div>
-                  <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: 'var(--color-tertiary-fixed)', color: 'var(--color-on-tertiary-container)', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>MTs & MA Terakreditasi B</div>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: '700', marginBottom: '12px' }}>Madrasah Diniyah & Salafiyah</h3>
-                  <p style={{ fontSize: '14px', color: 'var(--color-on-primary-container)', lineHeight: '1.7', marginBottom: '16px' }}>
-                    Pendidikan formal berjenjang MTs & MA yang terintegrasi dengan penguatan akidah akhlak, syariah, kurikulum nasional, dan kurikulum Cambridge.
-                  </p>
-                  {['Bilingual Harian Aktif (Bahasa Arab & Inggris)', 'Laboratorium Sains & Multimedia Komputer', 'Ekstrakurikuler Riset Ilmiah & Robotika Santri'].map((t, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-tertiary-fixed)', flexShrink: 0, marginTop: '2px' }}>check_circle</span>
-                      <span style={{ fontSize: '13px' }}>{t}</span>
-                    </div>
-                  ))}
-                </div>
-                <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 20px', borderRadius: '12px', background: 'var(--color-secondary-container)', color: 'var(--color-on-secondary-container)', fontWeight: '700', fontSize: '14px', textDecoration: 'none', marginTop: '24px', alignSelf: 'flex-start', zIndex: 1, position: 'relative' }}>
-                  Pelajari Madrasah Formal <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-                </a>
-              </div>
-
-              {/* Card 3 */}
-              <div style={{ padding: '32px', borderRadius: '24px', background: 'var(--color-surface-container-lowest)', boxShadow: 'var(--shadow-card)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', transition: 'all 0.3s' }}>
-                <div>
-                  <div style={{ width: '64px', height: '64px', borderRadius: '16px', background: 'var(--color-surface-container-high)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '32px', color: 'var(--color-tertiary)' }}>history_edu</span>
-                  </div>
-                  <div style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '999px', background: 'var(--color-surface-container)', color: 'var(--color-primary)', fontSize: '12px', fontWeight: '600', marginBottom: '12px' }}>Khasanah Intelektual Islam</div>
-                  <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '12px' }}>Kajian Kitab Kuning (Turats)</h3>
-                  <p style={{ fontSize: '14px', color: 'var(--color-on-surface-variant)', lineHeight: '1.7', marginBottom: '16px' }}>
-                    Penempaan literasi keilmuan Islam mendalam dengan mengkaji kitab-kitab muktabar karya ulama salafus shalih dalam nahwu, fiqh Syafi'i, hadits, & tasawuf.
-                  </p>
-                  {['Metode Bandongan & Sorogan Tradisional Matang', 'Ijazah Sanad Keilmuan Bersambung ke Mu\'allif', "Bahtsul Masail & Diskusi Fiqhiyah Santri Rutin"].map((t, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '8px' }}>
-                      <span className="material-symbols-outlined" style={{ fontSize: '18px', color: 'var(--color-secondary)', flexShrink: 0, marginTop: '2px' }}>check_circle</span>
-                      <span style={{ fontSize: '13px', color: 'var(--color-on-surface)' }}>{t}</span>
-                    </div>
-                  ))}
-                </div>
-                <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontWeight: '700', color: 'var(--color-primary)', textDecoration: 'none', fontSize: '14px', marginTop: '24px' }}>
-                  Pelajari Kajian Turats <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-                </a>
-              </div>
-              </div>
-
-              {/* Dots indicator — hanya mobile */}
-              <div className="program-slider-dots">
-                {[0,1,2].map(i => (
-                  <span key={i} className="program-slider-dot" />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Gallery ── */}
+                {/* ── Gallery ── */}
         <section style={{ background: 'var(--color-surface-container-low)', padding: '80px 48px' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
