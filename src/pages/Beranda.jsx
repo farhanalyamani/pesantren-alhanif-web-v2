@@ -257,6 +257,207 @@ function HeroSlider() {
 }
 
 
+
+/* ═══════════════════════════════════════════════════
+   GallerySection — Mobile: 2-col | Desktop: 3-col
+═══════════════════════════════════════════════════ */
+function GallerySection({ activeFilter, setActiveFilter }) {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
+
+  const filtered = activeFilter === 'Semua'
+    ? GALLERY_ITEMS
+    : GALLERY_ITEMS.filter(g => g.tag === activeFilter);
+
+  return (
+    <section style={{ background: 'var(--color-surface-container-low)', padding: isMobile ? '40px 0' : '80px 48px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 16px' : '0' }}>
+        {/* Header */}
+        <div style={{ marginBottom: isMobile ? '20px' : '32px' }}>
+          <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px' }}>Kehidupan Santri</div>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: isMobile ? '24px' : '32px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '8px' }}>Lentera Aktivitas & Kehidupan Santri</h2>
+          <p style={{ fontSize: isMobile ? '13px' : '15px', color: 'var(--color-on-surface-variant)' }}>Merekam jejak kedisiplinan, ukhuwah, keceriaan, dan dedikasi santri menuntut ilmu selama 24 jam di ma'had.</p>
+        </div>
+
+        {/* Filter chips */}
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px', overflowX: isMobile ? 'auto' : 'visible', flexWrap: 'nowrap', paddingBottom: isMobile ? '4px' : '0' }}>
+          {GALLERY_FILTERS.map((f) => (
+            <button
+              key={f}
+              onClick={() => setActiveFilter(f)}
+              style={{
+                padding: isMobile ? '6px 14px' : '8px 16px',
+                borderRadius: '999px', border: 'none', cursor: 'pointer',
+                background: activeFilter === f ? 'var(--color-primary)' : 'var(--color-surface-container-lowest)',
+                color: activeFilter === f ? 'var(--color-on-primary)' : 'var(--color-on-surface)',
+                fontWeight: '600', fontSize: isMobile ? '12px' : '13px',
+                boxShadow: activeFilter === f ? '0 4px 12px rgba(0,65,32,0.2)' : 'none',
+                transition: 'all 0.15s', flexShrink: 0, whiteSpace: 'nowrap',
+              }}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        {/* Gallery grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+          gap: isMobile ? '12px' : '24px',
+        }}>
+          {filtered.map((item, i) => (
+            <div key={i} style={{ position: 'relative', borderRadius: isMobile ? '16px' : '24px', overflow: 'hidden', background: 'var(--color-surface-container)', boxShadow: 'var(--shadow-card)' }}>
+              <img
+                src={item.img}
+                alt={item.title}
+                style={{ width: '100%', height: isMobile ? '160px' : '288px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,65,32,0.9) 0%, rgba(0,65,32,0.3) 50%, transparent 100%)', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', bottom: isMobile ? '10px' : '20px', left: isMobile ? '10px' : '20px', right: isMobile ? '10px' : '20px', color: 'white' }}>
+                <span style={{ display: 'inline-block', padding: '2px 8px', borderRadius: '999px', fontSize: isMobile ? '10px' : '12px', fontWeight: '600', marginBottom: '4px', ...item.tagStyle }}>{item.tag}</span>
+                <h4 style={{ fontSize: isMobile ? '12px' : '15px', fontWeight: '700', lineHeight: 1.3 }}>{item.title}</h4>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ textAlign: 'center', marginTop: isMobile ? '20px' : '32px' }}>
+          <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '14px', background: 'var(--color-surface-container-lowest)', color: 'var(--color-primary)', fontWeight: '600', textDecoration: 'none', boxShadow: 'var(--shadow-card)', fontSize: isMobile ? '13px' : '14px' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>photo_library</span>
+            Jelajahi Arsip Foto & Video Lainnya
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   NewsSection — Mobile: horizontal swipe | Desktop: 3-col
+═══════════════════════════════════════════════════ */
+function NewsSection() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    const fn = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', fn);
+    return () => window.removeEventListener('resize', fn);
+  }, []);
+
+  const handleScroll = () => {
+    if (!trackRef.current) return;
+    const el = trackRef.current;
+    const idx = Math.round(el.scrollLeft / (el.clientWidth * 0.85));
+    setActiveIdx(Math.min(idx, NEWS_ITEMS.length - 1));
+  };
+
+  return (
+    <section style={{ background: 'var(--color-surface)', padding: isMobile ? '40px 0' : '80px 48px', overflow: 'hidden' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 16px' : '0' }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', marginBottom: isMobile ? '20px' : '40px', flexWrap: 'wrap', gap: '12px' }}>
+          <div>
+            <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px' }}>Informasi Terkini</div>
+            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: isMobile ? '24px' : '32px', fontWeight: '700', color: 'var(--color-primary)' }}>Kabar Pesantren & Opini Santri</h2>
+          </div>
+          <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '700', color: 'var(--color-primary)', textDecoration: 'none', fontSize: '13px', flexShrink: 0 }}>
+            Lihat Semua <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+          </a>
+        </div>
+
+        {/* Cards */}
+        {isMobile ? (
+          <div>
+            <div
+              ref={trackRef}
+              onScroll={handleScroll}
+              style={{
+                display: 'flex', overflowX: 'auto',
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'none',
+                gap: '14px',
+                paddingBottom: '8px',
+                margin: '0 -16px', padding: '0 16px 8px',
+              }}
+            >
+              {NEWS_ITEMS.map((item, i) => (
+                <article key={i} style={{
+                  minWidth: '80vw', maxWidth: '80vw',
+                  scrollSnapAlign: 'start', flexShrink: 0,
+                  borderRadius: '20px', background: 'var(--color-surface-container-lowest)',
+                  overflow: 'hidden', boxShadow: 'var(--shadow-card)',
+                  display: 'flex', flexDirection: 'column',
+                }}>
+                  <div style={{ position: 'relative', height: '160px', overflow: 'hidden', flexShrink: 0 }}>
+                    <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'absolute', top: '12px', left: '12px' }}>
+                      <span style={{ padding: '3px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: '600', background: item.tagBg, color: item.tagColor }}>{item.tag}</span>
+                    </div>
+                  </div>
+                  <div style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: 'var(--color-on-surface-variant)' }}>
+                      <span className="material-symbols-outlined" style={{ fontSize: '14px', color: 'var(--color-tertiary)' }}>calendar_today</span>
+                      {item.date} • {item.author}
+                    </div>
+                    <h3 style={{ fontWeight: '700', fontSize: '14px', color: 'var(--color-primary)', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.title}</h3>
+                    <p style={{ fontSize: '12px', color: 'var(--color-on-surface-variant)', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', flex: 1 }}>{item.excerpt}</p>
+                    <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '700', color: 'var(--color-primary)', textDecoration: 'none', fontSize: '13px', marginTop: '4px' }}>
+                      Baca Selengkapnya <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>arrow_forward</span>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+            {/* Dots */}
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '16px' }}>
+              {NEWS_ITEMS.map((_, i) => (
+                <span key={i} style={{ width: i === activeIdx ? '24px' : '8px', height: '8px', borderRadius: '999px', background: i === activeIdx ? 'var(--color-primary)' : 'var(--color-outline-variant)', transition: 'all 0.3s', display: 'inline-block' }} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
+            {NEWS_ITEMS.map((item, i) => (
+              <article key={i} style={{ borderRadius: '24px', background: 'var(--color-surface-container-lowest)', overflow: 'hidden', boxShadow: 'var(--shadow-card)', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ position: 'relative', height: '208px', overflow: 'hidden' }}>
+                  <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'} />
+                  <div style={{ position: 'absolute', top: '16px', left: '16px' }}>
+                    <span style={{ padding: '4px 12px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', background: item.tagBg, color: item.tagColor }}>{item.tag}</span>
+                  </div>
+                </div>
+                <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--color-on-surface-variant)' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--color-tertiary)' }}>calendar_today</span>
+                    {item.date} • {item.author}
+                  </div>
+                  <h3 style={{ fontWeight: '700', fontSize: '15px', color: 'var(--color-primary)', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.title}</h3>
+                  <p style={{ fontSize: '13px', color: 'var(--color-on-surface-variant)', lineHeight: '1.6', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', flex: 1 }}>{item.excerpt}</p>
+                  <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '700', color: 'var(--color-primary)', textDecoration: 'none', fontSize: '13px' }}>
+                    Baca Selengkapnya <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>arrow_forward</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 /* ═══════════════════════════════════════════════════
    ProgramSection — Mobile-aware swipe slider
 ═══════════════════════════════════════════════════ */
@@ -772,114 +973,13 @@ export default function Beranda({ onNavigate }) {
         {/* ── Program Cards ── */}
         <ProgramSection />
 
-                {/* ── Gallery ── */}
-        <section style={{ background: 'var(--color-surface-container-low)', padding: '80px 48px' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
-              <div>
-                <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px' }}>Kehidupan Santri</div>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '32px', fontWeight: '700', color: 'var(--color-primary)', marginBottom: '8px' }}>Lentera Aktivitas & Kehidupan Santri</h2>
-                <p style={{ fontSize: '15px', color: 'var(--color-on-surface-variant)' }}>Merekam jejak kedisiplinan, ukhuwah, keceriaan, dan dedikasi santri menuntut ilmu selama 24 jam di ma'had.</p>
-              </div>
-            </div>
 
-            {/* Filter chips */}
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '24px' }}>
-              {GALLERY_FILTERS.map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setActiveFilter(f)}
-                  style={{
-                    padding: '8px 16px', borderRadius: '999px', border: 'none', cursor: 'pointer',
-                    background: activeFilter === f ? 'var(--color-primary)' : 'var(--color-surface-container-lowest)',
-                    color: activeFilter === f ? 'var(--color-on-primary)' : 'var(--color-on-surface)',
-                    fontWeight: '600', fontSize: '13px',
-                    boxShadow: activeFilter === f ? '0 4px 12px rgba(0,65,32,0.2)' : 'none',
-                    transition: 'all 0.15s',
-                  }}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
+        <GallerySection activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
 
-            {/* Gallery grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-              {GALLERY_ITEMS.map((item, i) => (
-                <div key={i} style={{ position: 'relative', borderRadius: '24px', overflow: 'hidden', background: 'var(--color-surface-container)', boxShadow: 'var(--shadow-card)' }}>
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    style={{ width: '100%', height: '288px', objectFit: 'cover', display: 'block', transition: 'transform 0.5s ease' }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                  />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,65,32,0.9) 0%, rgba(0,65,32,0.3) 50%, transparent 100%)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px', color: 'white' }}>
-                    <span style={{ display: 'inline-block', padding: '3px 10px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', marginBottom: '6px', ...item.tagStyle }}>{item.tag}</span>
-                    <h4 style={{ fontSize: '15px', fontWeight: '700', lineHeight: 1.3 }}>{item.title}</h4>
-                  </div>
-                </div>
-              ))}
-            </div>
 
-            <div style={{ textAlign: 'center', marginTop: '32px' }}>
-              <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '14px', background: 'var(--color-surface-container-lowest)', color: 'var(--color-primary)', fontWeight: '600', textDecoration: 'none', boxShadow: 'var(--shadow-card)', transition: 'all 0.15s', fontSize: '14px' }}>
-                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>photo_library</span>
-                Jelajahi Arsip Foto & Video Pesantren Lainnya
-              </a>
-            </div>
-          </div>
-        </section>
+        <NewsSection />
 
-        {/* ── News Section ── */}
-        <section style={{ background: 'var(--color-surface)', padding: '80px 48px' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '16px' }}>
-              <div>
-                <div style={{ fontSize: '12px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px' }}>Informasi Terkini</div>
-                <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '32px', fontWeight: '700', color: 'var(--color-primary)' }}>Kabar Pesantren & Opini Santri</h2>
-              </div>
-              <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '700', color: 'var(--color-primary)', textDecoration: 'none', fontSize: '14px' }}>
-                Lihat Semua Berita & Pengumuman <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-              </a>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
-              {NEWS_ITEMS.map((item, i) => (
-                <article key={i} style={{ borderRadius: '24px', background: 'var(--color-surface-container-lowest)', overflow: 'hidden', boxShadow: 'var(--shadow-card)', display: 'flex', flexDirection: 'column', transition: 'box-shadow 0.2s' }}>
-                  <div style={{ position: 'relative', height: '208px', overflow: 'hidden' }}>
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
-                      onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                      onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                    />
-                    <div style={{ position: 'absolute', top: '16px', left: '16px' }}>
-                      <span style={{ padding: '4px 12px', borderRadius: '999px', fontSize: '12px', fontWeight: '600', background: item.tagBg, color: item.tagColor }}>{item.tag}</span>
-                    </div>
-                  </div>
-                  <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--color-on-surface-variant)', marginBottom: '10px' }}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--color-tertiary)' }}>calendar_today</span>
-                        {item.date} • {item.author}
-                      </div>
-                      <h3 style={{ fontWeight: '700', fontSize: '15px', color: 'var(--color-primary)', lineHeight: '1.5', marginBottom: '8px', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.title}</h3>
-                      <p style={{ fontSize: '13px', color: 'var(--color-on-surface-variant)', lineHeight: '1.6', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.excerpt}</p>
-                    </div>
-                    <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '600', fontSize: '14px', color: 'var(--color-primary)', textDecoration: 'none' }}>
-                      Baca Selengkapnya <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>chevron_right</span>
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── CTA Banner ── */}
+                {/* ── CTA Banner ── */}
         <section style={{ background: 'var(--color-primary-container)', color: 'var(--color-on-primary)', padding: '64px 48px', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', right: '-64px', bottom: '-64px', width: '320px', height: '320px', opacity: 0.1, pointerEvents: 'none', color: 'var(--color-tertiary-fixed)' }}>
             <svg viewBox="0 0 100 100" fill="currentColor">
