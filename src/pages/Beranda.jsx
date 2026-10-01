@@ -650,6 +650,14 @@ export default function Beranda({ onNavigate }) {
                   Pelajari Kajian Turats <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
                 </a>
               </div>
+              </div>
+
+              {/* Dots indicator — hanya mobile */}
+              <div className="program-slider-dots">
+                {[0,1,2].map(i => (
+                  <span key={i} className="program-slider-dot" />
+                ))}
+              </div>
             </div>
           </div>
         </section>

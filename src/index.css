@@ -1815,3 +1815,77 @@ input[type="checkbox"] {
   /* Free edu banner */
   .beranda-section-pad > div > div { flex-direction: column !important; }
 }
+
+/* ══════════════════════════════════════════════
+   Program Slider (desktop = grid, mobile = swipe)
+══════════════════════════════════════════════ */
+
+/* Desktop: normal 3-col grid */
+.program-slider-wrapper { position: relative; }
+
+.program-slider-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.program-slider-dots { display: none; }
+
+/* Mobile: horizontal scroll snap */
+@media (max-width: 768px) {
+  .program-slider-wrapper {
+    overflow: hidden;
+    /* beri sedikit padding kiri agar card pertama tidak terpotong */
+    margin: 0 -16px;
+  }
+
+  .program-slider-track {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;          /* Firefox */
+    padding: 8px 16px 16px;
+    /* pakai width agar cards tidak menyusut */
+  }
+
+  .program-slider-track::-webkit-scrollbar { display: none; } /* Chrome */
+
+  /* setiap card jadi slide */
+  .program-slider-track > div {
+    min-width: 82vw;
+    max-width: 82vw;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  /* Dots */
+  .program-slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .program-slider-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--color-outline-variant);
+    display: inline-block;
+    transition: background 0.3s;
+  }
+  .program-slider-dot:first-child {
+    background: var(--color-primary);
+    width: 24px;
+    border-radius: 999px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .program-slider-track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
