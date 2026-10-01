@@ -1707,3 +1707,111 @@ input[type="checkbox"] {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.5; }
 }
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════════
+   BERANDA — Responsive Layout Classes
+══════════════════════════════════════════════ */
+.beranda-topbar-inner {
+  max-width:1280px; margin:0 auto; padding:0 48px; height:40px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.beranda-topbar-email { display:flex; align-items:center; gap:6px; }
+.beranda-nav-inner {
+  max-width:1280px; margin:0 auto; padding:0 48px; height:72px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.beranda-nav-links   { display:flex; align-items:center; gap:28px; }
+.beranda-nav-actions { display:flex; align-items:center; gap:12px; }
+.beranda-nav-btn-psb { display:inline-flex; }
+.beranda-prayer-inner {
+  max-width:1280px; margin:0 auto;
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;
+}
+.beranda-prayer-times { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.beranda-hero-section { padding:64px 48px; }
+.beranda-hero-grid {
+  max-width:1280px; margin:0 auto;
+  display:grid; grid-template-columns:7fr 5fr; gap:64px; align-items:center;
+}
+.beranda-stats-grid {
+  max-width:1280px; margin:64px auto 0;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+}
+.beranda-section-inner { max-width:1280px; margin:0 auto; padding:0 48px; }
+.beranda-section-pad   { padding:80px 48px; }
+.beranda-gallery-grid  { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
+.beranda-news-grid     { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:48px; }
+.beranda-programs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:48px; }
+.beranda-footer-grid {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px;
+  padding:64px 48px 48px; max-width:1280px; margin:0 auto;
+}
+.beranda-footer-bottom-inner {
+  max-width:1280px; margin:0 auto; padding:0 48px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+}
+.beranda-main-pad { padding-top:112px; }
+
+/* ── Mobile ≤ 768px ── */
+@media (max-width: 768px) {
+  .beranda-topbar-inner       { padding:0 16px; }
+  .beranda-topbar-email       { display:none !important; }
+  .beranda-nav-inner          { padding:0 16px; height:60px; }
+  .beranda-nav-links          { display:none !important; }
+  .beranda-nav-btn-psb        { display:none !important; }
+  .beranda-prayer-inner       { padding:0 16px; flex-direction:column; align-items:flex-start; gap:6px; }
+  .beranda-prayer-times       { gap:6px; overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px; width:100%; }
+  .beranda-hero-section       { padding:24px 16px 40px; }
+  .beranda-hero-grid          { grid-template-columns:1fr; gap:28px; }
+  .beranda-stats-grid         { grid-template-columns:repeat(2,1fr); gap:12px; margin-top:28px; }
+  .beranda-section-inner      { padding:0 16px; }
+  .beranda-section-pad        { padding:40px 16px; }
+  .beranda-gallery-grid       { grid-template-columns:1fr; gap:14px; margin-top:24px; }
+  .beranda-news-grid          { grid-template-columns:1fr; gap:16px; margin-top:24px; }
+  .beranda-programs-grid      { grid-template-columns:1fr; gap:16px; margin-top:24px; }
+  .beranda-footer-grid        { grid-template-columns:1fr; gap:28px; padding:36px 16px 28px; }
+  .beranda-footer-bottom-inner{ padding:0 16px; flex-direction:column; text-align:center; }
+  .beranda-main-pad           { padding-top:100px; }
+}
+
+/* ── Tablet 769–1024px ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .beranda-topbar-inner  { padding:0 24px; }
+  .beranda-nav-inner     { padding:0 24px; }
+  .beranda-hero-section  { padding:48px 24px; }
+  .beranda-hero-grid     { grid-template-columns:1fr 1fr; gap:40px; }
+  .beranda-stats-grid    { grid-template-columns:repeat(2,1fr); }
+  .beranda-section-inner { padding:0 24px; }
+  .beranda-section-pad   { padding:60px 24px; }
+  .beranda-gallery-grid  { grid-template-columns:repeat(2,1fr); }
+  .beranda-news-grid     { grid-template-columns:repeat(2,1fr); }
+  .beranda-programs-grid { grid-template-columns:repeat(2,1fr); }
+  .beranda-footer-grid   { grid-template-columns:1fr 1fr; gap:32px; padding:48px 24px 40px; }
+  .beranda-footer-bottom-inner { padding:0 24px; }
+}
+
+/* Kyai grid & slider */
+.beranda-kyai-grid {
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: min(40%,480px) 1fr;
+  gap: 48px; align-items: center;
+}
+.beranda-slider-height { position: relative; width: 100%; height: 480px; }
+
+@media (max-width: 768px) {
+  .beranda-kyai-grid   { grid-template-columns: 1fr !important; gap: 24px; }
+  .beranda-slider-height { height: 280px; }
+  /* panca jiwa 3 col on mobile */
+  .beranda-kyai-grid .beranda-pancajiwa { grid-template-columns: repeat(3,1fr) !important; }
+  /* Footer grid already handled */
+  .beranda-footer-grid { grid-template-columns: 1fr !important; gap: 28px !important; padding: 36px 16px 28px !important; }
+  /* Kyai photo */
+  .beranda-kyai-grid img { height: 260px !important; }
+  /* Free edu banner */
+  .beranda-section-pad > div > div { flex-direction: column !important; }
+}

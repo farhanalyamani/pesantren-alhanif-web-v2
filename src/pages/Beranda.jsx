@@ -185,7 +185,7 @@ function HeroSlider() {
         onMouseLeave={startAuto}
       >
         {/* Slides */}
-        <div style={{ position: 'relative', width: '100%', height: '480px' }}>
+        <div className="beranda-slider-height" style={{ position: 'relative', width: '100%' }}>
           {SLIDES.map((s, i) => (
             <div
               key={i}
@@ -273,15 +273,15 @@ export default function Beranda({ onNavigate }) {
       }}>
         {/* Top bar */}
         <div style={{ background: 'var(--color-primary)', color: 'var(--color-on-primary)' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '24px', fontSize: '12px' }}>
+          <div className="beranda-topbar-inner">
+            <div className="beranda-topbar-contacts" style={{ fontSize: '12px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span className="material-symbols-outlined" style={{ fontSize: '15px', color: 'var(--color-tertiary-fixed)' }}>call</span>
                 +62 812-3456-7890
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div className="beranda-topbar-email">
                 <span className="material-symbols-outlined" style={{ fontSize: '15px', color: 'var(--color-tertiary-fixed)' }}>mail</span>
-                info@pesantren-alhanif.id
+                <span style={{marginLeft:6}}>info@pesantren-alhanif.id</span>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: '600', background: 'var(--color-primary-container)', padding: '3px 12px', borderRadius: '999px', color: 'var(--color-on-primary-container)' }}>
@@ -293,8 +293,8 @@ export default function Beranda({ onNavigate }) {
 
         {/* Main nav */}
         <div style={{ background: 'rgba(249,249,255,0.96)', backdropFilter: 'blur(16px)' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px', height: '72px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="beranda-nav-inner">
+            <div className="beranda-nav-actions">
               <img
                 src={logoAlhanif}
                 alt="Logo Al-Hanif"
@@ -306,7 +306,7 @@ export default function Beranda({ onNavigate }) {
               </div>
             </div>
 
-            <nav style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+            <nav className="beranda-nav-links">
               {['Beranda', 'Profil', 'Pendidikan', 'Pendaftaran', 'Galeri', 'Berita'].map((item) => (
                 <a
                   key={item}
@@ -360,11 +360,11 @@ export default function Beranda({ onNavigate }) {
       </header>
 
       {/* Main — pt for double header (40+72=112px) */}
-      <main style={{ paddingTop: '112px' }}>
+      <main className="beranda-main-pad">
 
         {/* ── Prayer Time Bar ── */}
-        <section style={{ background: 'var(--color-surface-container-low)', padding: '12px 48px' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+        <section style={{ background: 'var(--color-surface-container-low)', padding: '12px 0' }}>
+          <div className="beranda-prayer-inner">
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#fff' }}>schedule</span>
@@ -373,7 +373,7 @@ export default function Beranda({ onNavigate }) {
               <span style={{ color: 'var(--color-outline-variant)' }}>•</span>
               <span style={{ fontSize: '12px', color: 'var(--color-on-surface-variant)' }}>Waktu Indonesia Barat (WIB)</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <div className="beranda-prayer-times">
               {getPrayerTimes().map((p) => (
                 <div key={p.name} style={{
                   display: 'flex', alignItems: 'center', gap: '6px',
@@ -392,17 +392,13 @@ export default function Beranda({ onNavigate }) {
         </section>
 
         {/* ── Hero Section ── */}
-        <section style={{
-          position: 'relative', overflow: 'hidden',
-          background: 'linear-gradient(to bottom, var(--color-surface-container-low), var(--color-surface) 60%)',
-          padding: '64px 48px',
-        }}>
+        <section className="beranda-hero-section" style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(to bottom, var(--color-surface-container-low), var(--color-surface) 60%)' }}>
           {/* Islamic geometry watermarks */}
           <div style={{ position: 'absolute', right: '-96px', top: '-96px', width: '384px', height: '384px', opacity: 0.04, pointerEvents: 'none', color: 'var(--color-primary)' }}>
             <svg viewBox="0 0 200 200" fill="currentColor"><polygon points="100,0 123,47 175,25 153,77 200,100 153,123 175,175 123,153 100,200 77,153 25,175 47,123 0,100 47,77 25,25 77,47" /></svg>
           </div>
 
-          <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '7fr 5fr', gap: '64px', alignItems: 'center' }}>
+          <div className="beranda-hero-grid">
             {/* Left */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -451,7 +447,7 @@ export default function Beranda({ onNavigate }) {
           </div>
 
           {/* Stats bar */}
-          <div style={{ maxWidth: '1280px', margin: '64px auto 0', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
+          <div className="beranda-stats-grid">
             {STATS.map((s, i) => (
               <div key={i} style={{ padding: '24px', borderRadius: '16px', background: 'var(--color-surface-container-lowest)', boxShadow: 'var(--shadow-card)', borderBottom: '4px solid var(--color-secondary-container)', transition: 'box-shadow 0.2s' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
@@ -468,7 +464,7 @@ export default function Beranda({ onNavigate }) {
         </section>
 
         {/* ── Free Education Banner ── */}
-        <section style={{ background: 'var(--color-surface-container)', padding: '48px', borderTop: '1px solid rgba(192,201,190,0.3)', borderBottom: '1px solid rgba(192,201,190,0.3)' }}>
+        <section className="beranda-section-pad" style={{ background: 'var(--color-surface-container)', borderTop: '1px solid rgba(192,201,190,0.3)', borderBottom: '1px solid rgba(192,201,190,0.3)' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <div style={{ background: 'var(--color-surface-container-lowest)', borderRadius: '24px', padding: '40px', boxShadow: 'var(--shadow-card)', border: '1px solid var(--color-secondary-container)', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', right: '-48px', top: '-48px', width: '192px', height: '192px', background: 'rgba(160,243,153,0.4)', borderRadius: '50%', filter: 'blur(32px)', pointerEvents: 'none' }} />
@@ -503,8 +499,8 @@ export default function Beranda({ onNavigate }) {
         </section>
 
         {/* ── Kyai Profile ── */}
-        <section style={{ background: 'var(--color-surface-container-lowest)', padding: '80px 48px', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '5fr 7fr', gap: '64px', alignItems: 'center' }}>
+        <section className="beranda-section-pad" style={{ background: 'var(--color-surface-container-lowest)', position: 'relative', overflow: 'hidden' }}>
+          <div className="beranda-kyai-grid" style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'min(40%,480px) 1fr', gap: '48px', alignItems: 'center' }}>
             {/* Photo */}
             <div style={{ position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 24px 48px -8px rgba(0,65,32,0.2)' }}>
               <img
@@ -554,7 +550,7 @@ export default function Beranda({ onNavigate }) {
               {/* Panca Jiwa */}
               <div>
                 <div style={{ fontWeight: '700', fontSize: '14px', color: 'var(--color-primary)', marginBottom: '12px' }}>Panca Jiwa Pondok Pesantren Yatim Al-Hanif:</div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px' }}>
                   {[
                     { icon: 'volunteer_activism', label: 'Keikhlasan' },
                     { icon: 'spa', label: 'Kesederhanaan' },
@@ -798,9 +794,9 @@ export default function Beranda({ onNavigate }) {
         </section>
 
         {/* ── Footer ── */}
-        <footer style={{ background: 'var(--color-surface-container-low)', padding: '64px 48px 40px' }}>
+        <footer className="beranda-section-pad" style={{ background: 'var(--color-surface-container-low)', padding: '0' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '4fr 3fr 5fr', gap: '40px', paddingBottom: '48px', borderBottom: '1px solid var(--color-outline-variant)' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '4fr 3fr 5fr', paddingBottom: '48px', borderBottom: '1px solid var(--color-outline-variant)' }}>
               {/* Brand */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
@@ -861,7 +857,7 @@ export default function Beranda({ onNavigate }) {
             </div>
 
             {/* Footer bottom */}
-            <div style={{ paddingTop: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '13px', color: 'var(--color-on-surface-variant)' }}>
+            <div style={{ paddingTop: '32px', paddingBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '13px', color: 'var(--color-on-surface-variant)' }}>
               <span>© 2025 Pondok Pesantren Yatim Al-Hanif. Dilindungi Undang-Undang.</span>
               <div style={{ display: 'flex', gap: '24px' }}>
                 {['Kebijakan Privasi', 'Syarat & Ketentuan', 'Brosur Digital'].map(link => (
