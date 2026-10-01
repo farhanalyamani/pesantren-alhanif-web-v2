@@ -810,11 +810,11 @@ export default function Beranda({ onNavigate }) {
               <img
                 src={logoAlhanif}
                 alt="Logo Al-Hanif"
-                style={{ width: isMobile ? '36px' : '44px', height: isMobile ? '36px' : '44px', borderRadius: '10px', objectFit: 'cover', border: '1px solid var(--color-secondary-container)' }}
+                style={{ width: isMobile ? '34px' : '44px', height: isMobile ? '34px' : '44px', borderRadius: '10px', objectFit: 'cover', border: '1px solid var(--color-secondary-container)', flexShrink: 0 }}
               />
               <div>
-                <div style={{ fontFamily: 'var(--font-serif)', fontSize: isMobile ? '17px' : '22px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.1 }}>Al-Hanif</div>
-                {!isMobile && <div style={{ fontSize: '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Pondok Pesantren Yatim</div>}
+                <div style={{ fontFamily: 'var(--font-serif)', fontSize: isMobile ? '15px' : '22px', fontWeight: '700', color: 'var(--color-primary)', lineHeight: 1.1 }}>Al-Hanif</div>
+                <div style={{ fontSize: isMobile ? '9px' : '10px', fontWeight: '700', color: 'var(--color-tertiary)', textTransform: 'uppercase', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>Pondok Pesantren Yatim</div>
               </div>
             </div>
 
@@ -881,6 +881,54 @@ export default function Beranda({ onNavigate }) {
 
           </div>
         </div>
+
+        {/* ── Mobile dropdown menu ── */}
+        {mobileMenuOpen && (
+          <div style={{
+            background: 'rgba(249,249,255,0.98)',
+            borderTop: '1px solid var(--color-outline-variant)',
+            padding: '12px 16px 16px',
+            display: 'flex', flexDirection: 'column', gap: 4,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+          }}>
+            {['Beranda', 'Profil', 'Pendidikan', 'Galeri', 'Berita'].map(item => (
+              <a key={item} href="#" onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  padding: '11px 14px', borderRadius: 10, fontSize: 14,
+                  fontWeight: item === 'Beranda' ? 700 : 500,
+                  color: item === 'Beranda' ? 'var(--color-primary)' : 'var(--color-on-surface)',
+                  textDecoration: 'none',
+                  background: item === 'Beranda' ? 'var(--color-secondary-container)' : 'transparent',
+                }}>
+                {item}
+              </a>
+            ))}
+            <div style={{ borderTop: '1px solid var(--color-outline-variant)', marginTop: 8, paddingTop: 10, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <a href="#" onClick={() => { setMobileMenuOpen(false); onNavigate('pendaftaran'); }}
+                style={{
+                  padding: '12px 14px', borderRadius: 10, fontSize: 14, fontWeight: 700,
+                  background: 'var(--color-primary)', color: '#fff',
+                  textDecoration: 'none', textAlign: 'center',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                }}>
+                <span className="material-symbols-outlined" style={{ fontSize: 18 }}>how_to_reg</span>
+                Pendaftaran Santri Baru
+              </a>
+              <button onClick={() => { setMobileMenuOpen(false); onNavigate('login'); }}
+                style={{
+                  padding: '12px 14px', borderRadius: 10, fontSize: 14, fontWeight: 600,
+                  background: 'var(--color-surface-container)',
+                  color: 'var(--color-on-surface)',
+                  border: '1.5px solid var(--color-outline-variant)',
+                  cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                }}>
+                <span className="material-symbols-outlined" style={{ fontSize: 18 }}>login</span>
+                Masuk Portal SIM
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main — pt for double header (40+72=112px) */}
