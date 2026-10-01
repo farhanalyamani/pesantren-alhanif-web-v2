@@ -14,10 +14,12 @@ const STRUKTUR = {
     foto: null,
     ring: '#D4AF37',
   },
-  sekretariat: [
-    { jabatan: 'Sekretaris Umum', nama: 'Ust. Ahmad Fauzan, S.Pd.', pendidikan: 'S1 Pendidikan Islam', foto: null },
-    { jabatan: 'Bendahara Umum', nama: 'Ust. Ridwan Hakim, S.E.', pendidikan: 'S1 Ekonomi Syariah', foto: null },
-  ],
+  sekretariat: {
+    jabatan: 'Sekretaris & Bendahara Umum',
+    nama: 'Ust. Ahmad Fauzan, S.Pd.',
+    pendidikan: 'S1 Pendidikan Islam',
+    foto: null,
+  },
 
   // ── Madrasah Tsanawiyah (MTs) ──
   mts: {
@@ -307,9 +309,9 @@ export default function StrukturOrganisasi({ onNavigate }) {
           <Connector />
 
           {/* SEKRETARIAT */}
-          <SectionBadge icon="groups" title="Sekretaris & Bendahara" subtitle="Administrasi & Keuangan" color="primary" />
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(2, 220px)', gap: isMobile ? '10px' : '24px', justifyContent: 'center' }}>
-            {STRUKTUR.sekretariat.map((p, i) => <PersonCard key={i} {...p} size="md" />)}
+          <SectionBadge icon="groups" title="Sekretaris & Bendahara Umum" subtitle="Administrasi & Keuangan" color="primary" />
+          <div style={{ maxWidth: '260px', width: '100%' }}>
+            <PersonCard {...STRUKTUR.sekretariat} size="md" />
           </div>
           <Connector />
 
